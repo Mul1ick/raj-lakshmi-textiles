@@ -51,6 +51,7 @@ export default function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-12">
           <NavLink className={linkClass} to="/">Collections</NavLink>
+          <NavLink className={linkClass} to="/about">About</NavLink> {/* Added here */}
           <NavLink className={linkClass} to="/catalog">Catalog</NavLink>
           <NavLink className={linkClass} to="/clients">Clients</NavLink>
           <NavLink className={linkClass} to="/enquiry">Enquiry</NavLink>
@@ -84,6 +85,7 @@ export default function Navbar() {
         }`}
       >
         <NavLink className={mobileLinkClass} to="/">Collections</NavLink>
+        <NavLink className={mobileLinkClass} to="/about">About</NavLink> {/* Added here */}
         <NavLink className={mobileLinkClass} to="/catalog">Catalog</NavLink>
         <NavLink className={mobileLinkClass} to="/clients">Clients</NavLink>
         <NavLink className={mobileLinkClass} to="/enquiry">Enquiry</NavLink>
