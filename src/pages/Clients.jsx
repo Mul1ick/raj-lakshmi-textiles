@@ -106,7 +106,7 @@ export default function Clients() {
                 <p className="text-secondary-fixed-dim text-lg">Follow our process, from the heart of the Carrara quarries to the final installation on-site.</p>
               </div>
               <a className="mt-8 md:mt-0 text-tertiary-fixed-dim border-b-2 border-tertiary-fixed-dim/30 pb-1 font-bold tracking-widest uppercase text-xs hover:text-tertiary transition-colors" href="#">
-                @DigitalAtelierMarble
+                @Rajlakshmi
               </a>
             </div>
             <div className="flex gap-8 overflow-x-auto pb-12 snap-x no-scrollbar">
@@ -132,7 +132,7 @@ export default function Clients() {
             <span className="text-9xl font-headline font-black text-surface-container absolute -top-20 -left-10 select-none opacity-50">"</span>
             <div className="relative z-10 pl-20">
               <h2 className="text-4xl md:text-5xl font-headline italic leading-tight text-on-surface mb-12 max-w-4xl">
-                The level of craftsmanship is unparalleled. Digital Atelier doesn't just install stone; they translate architectural poetry into physical reality.
+                The level of craftsmanship is unparalleled. Rajlakshmi Marbles doesn't just install stone; they translate architectural poetry into physical reality.
               </h2>
               <div className="flex items-center gap-6">
                 <div className="w-16 h-16 rounded-full bg-surface-container-highest overflow-hidden">

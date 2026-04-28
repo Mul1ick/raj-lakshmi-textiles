@@ -1,14 +1,72 @@
+// https://script.google.com/macros/s/AKfycbwN83gPWHil5mAI8uXMUZpy3l0JfaqZKvLBoKPbMX1HGkFty0FnVq943WPxOflW99K3/exec
 import { useState } from 'react'
 
 const PALETTES = ['Calacatta Gold', 'Statuario', 'Nero Marquina', 'Carrara']
 
 export default function Enquiry() {
   const [selected, setSelected] = useState('Calacatta Gold')
+  
+  // Manage the different states of our form submission
+  const [submitStatus, setSubmitStatus] = useState('idle') // 'idle', 'submitting', 'success', 'error'
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    projectType: 'Residential Interior',
+    timeline: 'Immediate (1-3 months)',
+    details: ''
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setSubmitStatus('submitting')
+
+    // Replace this with your actual Google Apps Script Web App URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN83gPWHil5mAI8uXMUZpy3l0JfaqZKvLBoKPbMX1HGkFty0FnVq943WPxOflW99K3/exec'
+
+    const payload = {
+      ...formData,
+      material: selected
+    }
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      })
+
+      // Show the beautiful success UI
+      setSubmitStatus('success')
+      
+      // Reset form data in the background
+      setFormData({
+        name: '',
+        email: '',
+        projectType: 'Residential Interior',
+        timeline: 'Immediate (1-3 months)',
+        details: ''
+      })
+      setSelected('Calacatta Gold')
+      
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitStatus('error')
+    }
+  }
 
   return (
     <div className="bg-[#F7F7F5] text-on-surface antialiased">
       <main className="pt-32 pb-24">
         <div className="max-w-screen-2xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
           {/* Left Column */}
           <div className="lg:col-span-5 pt-8">
             <span className="text-tertiary font-semibold tracking-widest text-xs uppercase mb-4 block">Consultation</span>
@@ -47,85 +105,138 @@ export default function Enquiry() {
             </div>
           </div>
 
-          {/* Right Column: Form */}
-          <div className="lg:col-span-7 bg-white p-12 lg:p-16 rounded-xl shadow-[0_20px_40px_rgba(28,28,30,0.04)]">
-            <form className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Full Name</label>
-                  <input
-                    className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40"
-                    placeholder="Julianne Moore"
-                    type="text"
-                  />
+          {/* Right Column: Dynamic Form Area */}
+          <div className="lg:col-span-7 bg-white p-12 lg:p-16 rounded-xl shadow-[0_20px_40px_rgba(28,28,30,0.04)] min-h-[700px] flex flex-col justify-center relative overflow-hidden">
+            
+            {/* Success State UI */}
+            {submitStatus === 'success' ? (
+              <div className="text-center transition-all duration-700 ease-in-out">
+                <div className="w-24 h-24 bg-[#f4f4f2] rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+                  <span className="material-symbols-outlined text-5xl text-[#bb0016]">check_circle</span>
                 </div>
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Email Address</label>
-                  <input
-                    className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40"
-                    placeholder="j.moore@studio.com"
-                    type="email"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Type</label>
-                  <select className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface">
-                    <option>Residential Interior</option>
-                    <option>Commercial Lobby</option>
-                    <option>Bespoke Furniture</option>
-                    <option>Exterior Facade</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Estimated Timeline</label>
-                  <select className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface">
-                    <option>Immediate (1-3 months)</option>
-                    <option>Planning (3-6 months)</option>
-                    <option>Future (6+ months)</option>
-                  </select>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Preferred Material Palette</label>
-                <div className="flex flex-wrap gap-3 pt-2">
-                  {PALETTES.map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      onClick={() => setSelected(p)}
-                      className={`px-5 py-2 text-xs font-medium rounded-full transition-colors ${
-                        selected === p
-                          ? 'bg-primary text-white'
-                          : 'bg-surface-container-high text-secondary hover:bg-surface-container-highest'
-                      }`}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Details</label>
-                <textarea
-                  className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40 resize-none"
-                  placeholder="Describe the architectural intent and specific requirements..."
-                  rows={4}
-                />
-              </div>
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  className="w-full md:w-auto bg-[#EF2029] text-white px-12 py-5 rounded-md text-sm font-bold tracking-widest uppercase hover:scale-102 transition-transform duration-200"
-                >
-                  Submit Enquiry
-                </button>
-                <p className="mt-6 text-xs text-secondary leading-relaxed max-w-sm">
-                  By submitting, you agree to our heritage standards and data privacy protocols. A consultant will contact you within 24 business hours.
+                <h2 className="text-4xl font-bold text-[#1C1C1E] mb-4 font-noto-serif">Enquiry Received</h2>
+                <p className="text-lg text-[#8A8A8F] leading-relaxed max-w-md mx-auto mb-12">
+                  Thank you for reaching out. One of our senior consultants will review your project requirements and contact you within 24 business hours.
                 </p>
+                <button
+                  onClick={() => setSubmitStatus('idle')}
+                  className="border-b-2 border-tertiary text-[#1C1C1E] px-4 py-2 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors"
+                >
+                  Submit Another Project
+                </button>
               </div>
-            </form>
+            ) : (
+              
+              /* Default Form UI */
+              <form onSubmit={handleSubmit} className="space-y-8 transition-all duration-700 ease-in-out w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Full Name</label>
+                    <input
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40"
+                      placeholder="Julianne Moore"
+                      type="text"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Email Address</label>
+                    <input
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40"
+                      placeholder="j.moore@studio.com"
+                      type="email"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Type</label>
+                    <select 
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface"
+                    >
+                      <option>Residential Interior</option>
+                      <option>Commercial Lobby</option>
+                      <option>Bespoke Furniture</option>
+                      <option>Exterior Facade</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Estimated Timeline</label>
+                    <select 
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleChange}
+                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface"
+                    >
+                      <option>Immediate (1-3 months)</option>
+                      <option>Planning (3-6 months)</option>
+                      <option>Future (6+ months)</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Preferred Material Palette</label>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    {PALETTES.map((p) => (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setSelected(p)}
+                        className={`px-5 py-2 text-xs font-medium rounded-full transition-colors ${
+                          selected === p
+                            ? 'bg-primary text-white'
+                            : 'bg-surface-container-high text-secondary hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Details</label>
+                  <textarea
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40 resize-none"
+                    placeholder="Describe the architectural intent and specific requirements..."
+                    rows={4}
+                  />
+                </div>
+                
+                {/* Error State Message */}
+                {submitStatus === 'error' && (
+                  <div className="bg-[#ffdad6] text-[#ba1a1a] p-4 rounded-md text-sm font-medium">
+                    There was a problem submitting your request. Please try again.
+                  </div>
+                )}
+
+                <div className="pt-4 flex flex-col md:flex-row items-center gap-6">
+                  <button
+                    type="submit"
+                    disabled={submitStatus === 'submitting'}
+                    className={`w-full md:w-auto bg-[#EF2029] text-white px-12 py-5 rounded-md text-sm font-bold tracking-widest uppercase transition-all duration-300 ${submitStatus === 'submitting' ? 'opacity-70 cursor-wait' : 'hover:scale-102 hover:shadow-lg hover:shadow-[#EF2029]/20'}`}
+                  >
+                    {submitStatus === 'submitting' ? 'Processing...' : 'Submit Enquiry'}
+                  </button>
+                  <p className="text-xs text-secondary leading-relaxed max-w-xs">
+                    By submitting, you agree to our heritage standards and data privacy protocols.
+                  </p>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </main>

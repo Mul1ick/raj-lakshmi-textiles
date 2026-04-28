@@ -3,7 +3,11 @@ export default function Footer() {
     <footer className="bg-[#1C1C1E] text-[#8A8A8F] pt-24 pb-12">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 w-full max-w-screen-2xl mx-auto">
         <div className="md:col-span-1">
-          <span className="text-3xl font-black text-[#F7F7F5] mb-8 block font-noto-serif">Digital Atelier.</span>
+         <img 
+            src="/logo-white.png" 
+            alt="Raj Lakshmi Marbles" 
+            className="h-12 w-auto mb-8" 
+          />
           <p className="text-sm leading-relaxed mb-8">The curated destination for architectural stone and premium marble surfaces. Since 1988.</p>
           <div className="flex space-x-6">
             <a className="hover:text-[#F5B938] transition-colors" href="#"><span className="material-symbols-outlined">public</span></a>
@@ -35,12 +39,12 @@ export default function Footer() {
             402 Industrial Estate, <br />
             Marble District, <br />
             Rajasthan, 305801 <br />
-            <span className="text-[#F5B938] mt-4 block">hello@digitalatelier.com</span>
+            <span className="text-[#F5B938] mt-4 block">hello@rajlakshmi.com</span>
           </p>
         </div>
       </div>
       <div className="max-w-screen-2xl mx-auto px-12 mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest uppercase font-bold">
-        <p>© 2024 Digital Atelier Marble. All Rights Reserved. Crafted for Prestige.</p>
+        <p>© {new Date().getFullYear()} Raj Lakshmi Marbles. All Rights Reserved. Crafted for Prestige.</p>
         <div className="flex space-x-8 mt-4 md:mt-0">
           <a className="hover:text-[#F5B938] transition-colors" href="#">Privacy Policy</a>
           <a className="hover:text-[#F5B938] transition-colors" href="#">Terms of Service</a>

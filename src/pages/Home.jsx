@@ -37,6 +37,71 @@ export default function Home() {
           </div>
         </div>
       </header>
+      <section className="py-32 bg-[#F7F7F5] relative overflow-hidden z-10">
+        <div className="max-w-screen-2xl mx-auto px-12">
+          {/* Section Header */}
+          <div className="text-center max-w-4xl mx-auto mb-20">
+            <span className="inline-block text-[#bb0016] font-bold tracking-[0.2em] text-xs mb-4 font-body uppercase">
+              The Raj Lakshmi Legacy
+            </span>
+            <h2 className="text-4xl md:text-5xl font-noto-serif font-bold text-[#1C1C1E] leading-tight mb-8">
+              Where Decades of Experience Meet Modern Standards of Quality.
+            </h2>
+            <p className="text-lg text-[#8A8A8F] leading-relaxed max-w-2xl mx-auto">
+              With over 36 years of industry expertise, we have built a legacy rooted in trust, precision, and excellence. We don’t just provide products; we deliver peace of mind through a proven track record of reliability.
+            </p>
+          </div>
+
+          {/* Feature Grid - Glassmorphism Aesthetic */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            {/* Card 1 */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
+              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
+                <span className="material-symbols-outlined text-[28px]">verified</span>
+              </div>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">Uncompromising Quality</h3>
+              <p className="text-sm text-[#8A8A8F] leading-relaxed">
+                Our reputation is built on "top-notch" standards. We implement rigorous quality control measures to ensure that every product meets the highest benchmarks of durability and performance.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
+              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
+                <span className="material-symbols-outlined text-[28px]">account_balance</span>
+              </div>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">True Value for Money</h3>
+              <p className="text-sm text-[#8A8A8F] leading-relaxed">
+                Premium quality shouldn't come with an unreasonable price tag. Our streamlined processes and deep industry roots allow us to offer high-end solutions that maximize your investment.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
+              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
+                <span className="material-symbols-outlined text-[28px]">history_edu</span>
+              </div>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">Decades of Mastery</h3>
+              <p className="text-sm text-[#8A8A8F] leading-relaxed">
+                Three and a half decades in the business means we’ve seen the industry evolve. We leverage this deep institutional knowledge to anticipate challenges and provide unmatched insights.
+              </p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
+              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
+                <span className="material-symbols-outlined text-[28px]">handshake</span>
+              </div>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">Client-Centric Excellence</h3>
+              <p className="text-sm text-[#8A8A8F] leading-relaxed">
+                We are known for our commitment to the end result. Our focus remains on delivering products that provide long-term utility, ensuring our value proposition extends far beyond the initial purchase.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       {/* Curator's Selection (Bento Grid) */}
       <section className="py-32 bg-[#F7F7F5]">
