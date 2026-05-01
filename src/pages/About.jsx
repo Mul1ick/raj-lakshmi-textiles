@@ -22,8 +22,8 @@ export default function About() {
               <div className="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative">
                 <img
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                  alt="Master stonemason inspecting a massive block of white Italian marble"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI1jukz-O4eSK8sxTL9Pj02bX75XxQi8ZOxxEyHROiqTr3ZW_nF0yVVmi3AjxFlEU7PmUSKUeX6ob_uHuXlpFDDKLULSpXwzfKjZnxHxOmfBzUvLIbJHLfu0nGQ1C5DIex4SSFkBRs6aIRVKt_BpD6GR5YSQjtL_ztYfuhrqZLTsLjYW0t5UI7mPieqKzSJSbfyAyVBvnL6KSAqgIPeRKFk0tpkkJmJ0wsEf_ehbZVRPeOkkhUc5DnSZ2tWZl-LBejSqBHYkaNqJU_" // Placeholder from your existing assets
+                  alt="Statuario marble — the signature white of Raj Lakshmi's curated collection"
+                  src="https://akvinternationalstones.com/wp-content/uploads/2024/09/STATUARIO-CARRARA.png"
                   loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1E]/40 to-transparent"></div>

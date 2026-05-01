@@ -1,7 +1,67 @@
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import StoneCard from '../components/StoneCard' // Import it at the top
+import StoneCard from '../components/StoneCard'
+import curatedMarbles from '../curated-marbles.json'
+
+const PAGE_SIZE = 12
 
 export default function Catalog() {
+  const [page, setPage] = useState(1)
+  const [filter, setFilter] = useState('All')
+  const [active, setActive] = useState(null)
+  const [transitioning, setTransitioning] = useState(false)
+  const sectionRef = useRef(null)
+
+  const goToPage = (p) => {
+    if (p === page) return
+    setTransitioning(true)
+    if (sectionRef.current) {
+      const top = sectionRef.current.getBoundingClientRect().top + window.scrollY - 200
+      const distance = Math.abs(window.scrollY - top)
+      window.scrollTo({ top, behavior: 'smooth' })
+      const delay = Math.min(600, Math.max(200, distance * 0.4))
+      setTimeout(() => {
+        setPage(p)
+        requestAnimationFrame(() => setTransitioning(false))
+      }, delay)
+    } else {
+      setPage(p)
+      requestAnimationFrame(() => setTransitioning(false))
+    }
+  }
+
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(curatedMarbles.map((m) => m.category)))
+    return ['All', ...cats]
+  }, [])
+
+  const filtered = useMemo(() => {
+    return filter === 'All'
+      ? curatedMarbles
+      : curatedMarbles.filter((m) => m.category === filter)
+  }, [filter])
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
+  useEffect(() => {
+    setPage(1)
+  }, [filter])
+
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && setActive(null)
+    if (active) {
+      document.body.style.overflow = 'hidden'
+      window.addEventListener('keydown', onKey)
+    }
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [active])
+
+  const featured = curatedMarbles.slice(0, 5)
+
   return (
     <div className="bg-surface text-on-surface">
       <main className="pt-32 pb-24">
@@ -24,82 +84,130 @@ export default function Catalog() {
           </div>
         </header>
 
-        {/* Catalog Gallery */}
-{/* Refactored Catalog Gallery */}
+        {/* Featured Picks */}
         <section className="px-12 max-w-screen-2xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            
-            {/* Large Feature */}
-            <StoneCard 
+            <StoneCard
               className="md:col-span-8"
               aspectRatio="aspect-[16/9]"
-              title="Carrara Statuario"
-              subtitle="Classic Italian White · Luxury Selection"
+              title={featured[0].name}
+              subtitle={`${featured[0].category} · Signature Selection`}
               number="001"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCacNLx5MOFVS-jDVXjGFLsJeh1TtXuwF_efPkiCbtCfdoGuoLyQeltqf7aX0Wu6VC3bvjmgvgXFlKsi9TTZ--akFgjkLJIzttzWIRcOKGs3O35twp9kB7a1RsTYFUfIpOLGy1q_Zvt-F2dVdvp228syzHfcxtENa21CQCAfoiibX0LolP5FZ2OAEcxvoXidd4Yhnx89M1TtjPUYZDm6IBJXHwxFz9KoY4KdPwCXEfnD_CN85RbJ-72pIwC93gQtTsyhg6Pvba5is6-"
-              alt="Close-up texture of premium Statuario marble"
-              lazyLoad={false} // It's at the top, so load it immediately!
+              src={featured[0].src}
+              alt={featured[0].name}
+              lazyLoad={false}
             />
-
-            {/* Secondary */}
-            <StoneCard 
+            <StoneCard
               className="md:col-span-4 pt-0 md:pt-12"
               aspectRatio="aspect-[4/5]"
-              title="Nero Marquina"
-              subtitle="Spanish Midnight · High Contrast"
+              title={featured[1].name}
+              subtitle={`${featured[1].category} · Premium`}
               number="002"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQJHVaEw-bdYiTjKUERpq3Yvg1ZSnwQ7rSdm4KFU-5nT39G7ny_kAPWu7rYmDzWPNU8pI3woA9EWbHC6WNROHFGLLk7BDWTtqFYJEEzYw4l59WGgc6UeZwlt7s4kYDPF6tQotTgVzOrhlnMLBbIeZQGYiilXCSqJ7YYu-aaOL__dcUfpYhM_4LkfO_f0XItntCiN-sslD97NMqETqG4YcN-f2969hX1NyXJsAXVSoR2UqxFyFGr8SgulcJc6_loS96KBM0oGE_P4qN"
-              alt="Polished Nero Marquina marble slab"
+              src={featured[1].src}
+              alt={featured[1].name}
             />
-
-            {/* Three Column Row */}
-            {[
-              {
-                title: 'Verde Guatemala', sub: 'Forest Deep · Tonal depth',
-                src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAloGGa3fewxdJtQ0xuOTta9RuoHrBSZO5z37UWzdBvnKRytbgO434t_6fxhUXke59fFUGeK0dRxjOoIo8-mtYD9vKpo96eVvr6WCFE0yq6Pu4rv29kb1HAas0JqOClF786sph1u0aNvi4NkrvglPTaMcquSnEQGsRdl4dTTBAhNwN1V5WelH3bqFwZIeLvbIsnb58_bt-A3N1VqqzLIF4TFHuwliG-Zu8-utc6qg6nvn6ClL14DM7W3XEPH51RAyjOA7eZU7OZ4ksz',
-                alt: 'Emerald green marble'
-              },
-              {
-                title: 'Calacatta Oro', sub: 'Premium Gold · Radiant Warmth',
-                src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCUa9iqSX6MBqjajKeCwzsLZEU-MHICJK_OV7yxqO8v3NdKIKbf_biToBH8tKTbE3CbU6gCCthScdVGkPg2yWo9on-5GuB33Ckt506SP8KKr-K5N7w7HZPYNdRi56PyhckAkP2MMJzsYhvyNzjXcYq-OdA-JiBcsEOXO03C4hH1k4NirJZCUPLqw1ipbqgqsbtyu4US3rcqqdez2xDEB6xj4VzFLCzvX3Zpp_CDm_o3BdRUjaj9Q7Ee4L8mZakBfvZjFv9s5Oj1BGdT',
-                alt: 'Elegant Calacatta Gold marble texture'
-              },
-              {
-                title: 'Bardiglio Nuvolato', sub: 'Atmospheric Grey · Structural Elegance',
-                src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAITnCK1nte76kqVye_DqCk7En_ZfTQCnmJU8_xLmRcdtH0xisV3bcSJ_v8tjgZbB2iC1ow-qdXCOtMatV2c2297S4PK5KR_HmimG0E0-qlpieUD0rGd2tqt6SPWmbbA1uPzQOTiZIYjAK4OeMXakGRdPC2uTkApm4vX20h_4jHJgQ-mYtYNmLVAxr-YHrlvRlbThSe9U65Ny16_1Y5jA8ieS3femBJ35wv2JflbdnIWvhRE9TAfpN9mR05nMmgrIY3qE0FekynUIDG',
-                alt: 'Grey Bardiglio marble'
-              },
-            ].map((stone) => (
-              <StoneCard 
-                key={stone.title}
+            {featured.slice(2, 5).map((stone) => (
+              <StoneCard
+                key={stone.name}
                 className="md:col-span-4"
                 aspectRatio="aspect-square"
-                title={stone.title}
-                subtitle={stone.sub}
+                title={stone.name}
+                subtitle={`${stone.category} · Curated`}
                 src={stone.src}
-                alt={stone.alt}
-                // lazyLoad is implicitly true based on our component defaults
+                alt={stone.name}
               />
             ))}
+          </div>
+        </section>
 
-            {/* Wide Feature */}
-            <div className="md:col-span-12 group cursor-pointer mt-12">
-              <div className="relative overflow-hidden bg-surface-container-low h-[500px]">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  alt="Wide shot of a minimalist luxury showroom featuring massive floor-to-ceiling marble slabs"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLVO7jQY3rqKf128Wo-Dm-h0vRuOxrhoyQcT11EDF2NJEvbDYmCkcGCznzY6euQ__dABkBAKd6JtqaSbAF9f0uWdUKzy5NdpDZUXT9KXQarVkUweYNLXEkt1EPDEhd5fzReqgV46dcORDxNR2BcPEHixo99A0k-7tU_DI-WEfzw6kvzc_EXe9Ta2ZRvTGEzgg3RyTCkLyz-G8wyvn4v2hhIbeOjq53rUgtVoyy7q_Qaj3t6JwsaybRwO8P3IaQpdZlc_UMYBU6js"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1E]/60 to-transparent flex items-end p-12">
-                  <div className="text-white">
-                    <span className="text-[#ffdea6] font-bold tracking-widest mb-2 block text-xs">NEW ARRIVAL</span>
-                    <h3 className="text-4xl font-bold font-noto-serif">The Anatolian Collection</h3>
-                    <p className="max-w-md mt-4 text-white/80">Discover our newest acquisition of rare travertine and limestone from the heart of Turkey.</p>
-                  </div>
-                </div>
-              </div>
+        {/* Full Catalogue */}
+        <section ref={sectionRef} className="px-12 max-w-screen-2xl mx-auto mt-32 scroll-mt-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+            <div>
+              <span className="text-tertiary font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Full Collection</span>
+              <h2 className="text-4xl md:text-5xl font-bold font-noto-serif text-[#1C1C1E] leading-tight">The Complete Catalogue</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setFilter(c)}
+                  className={`px-4 py-2 text-xs font-bold tracking-widest uppercase border transition-colors ${
+                    filter === c
+                      ? 'bg-[#1C1C1E] text-white border-[#1C1C1E]'
+                      : 'bg-transparent text-[#1C1C1E] border-[#1C1C1E]/20 hover:border-[#1C1C1E]'
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
             </div>
           </div>
+
+          <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-opacity duration-300 ease-out ${transitioning ? 'opacity-0' : 'opacity-100'}`}>
+            {pageItems.map((stone, idx) => (
+              <button
+                key={stone.name}
+                onClick={() => setActive(stone)}
+                className="group text-left"
+              >
+                <div className="relative overflow-hidden bg-surface-container-low aspect-square mb-3">
+                  <img
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    src={stone.src}
+                    alt={stone.name}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-[#1C1C1E]/0 group-hover:bg-[#1C1C1E]/20 transition-colors flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold tracking-widest uppercase">View</span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-base font-bold text-[#1C1C1E]">{stone.name}</h3>
+                    <p className="text-[#8A8A8F] text-xs">{stone.category}</p>
+                  </div>
+                  <span className="text-[#EF2029] text-xs font-bold">
+                    {String((page - 1) * PAGE_SIZE + idx + 1).padStart(3, '0')}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <div className="mt-16 flex items-center justify-center gap-4">
+              <button
+                onClick={() => goToPage(Math.max(1, page - 1))}
+                disabled={page === 1}
+                className="px-6 py-3 text-xs font-bold tracking-widest uppercase border border-[#1C1C1E]/20 disabled:opacity-30 hover:border-[#1C1C1E] transition-colors"
+              >
+                Previous
+              </button>
+              <div className="flex gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => goToPage(p)}
+                    className={`w-10 h-10 text-sm font-bold transition-colors ${
+                      p === page
+                        ? 'bg-[#1C1C1E] text-white'
+                        : 'text-[#1C1C1E] hover:bg-[#1C1C1E]/5'
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => goToPage(Math.min(totalPages, page + 1))}
+                disabled={page === totalPages}
+                className="px-6 py-3 text-xs font-bold tracking-widest uppercase border border-[#1C1C1E]/20 disabled:opacity-30 hover:border-[#1C1C1E] transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </section>
 
         {/* CTA */}
@@ -114,6 +222,36 @@ export default function Catalog() {
           </div>
         </section>
       </main>
+
+      {/* Lightbox */}
+      {active && (
+        <div
+          className="fixed inset-0 z-50 bg-[#1C1C1E]/90 flex items-center justify-center p-6 md:p-12"
+          onClick={() => setActive(null)}
+        >
+          <button
+            onClick={() => setActive(null)}
+            className="absolute top-6 right-6 text-white text-3xl leading-none w-12 h-12 flex items-center justify-center hover:bg-white/10 transition-colors"
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <div
+            className="max-w-5xl w-full max-h-full flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={active.src}
+              alt={active.name}
+              className="max-h-[75vh] w-auto object-contain"
+            />
+            <div className="text-center mt-8">
+              <span className="text-[#F5B938] font-bold tracking-[0.3em] text-xs uppercase mb-3 block">{active.category}</span>
+              <h3 className="text-3xl md:text-4xl font-bold font-noto-serif text-white">{active.name}</h3>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

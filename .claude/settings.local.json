@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c 'import json; d=json.load\\(open\\('\\\\''__TRACKED_VAR__'\\\\''\\)\\); print\\(type\\(d\\).__name__, len\\(d\\) if hasattr\\(d,'\\\\''__len__'\\\\''\\) else '\\\\'''\\\\''\\); print\\(list\\(d.keys\\(\\)\\) if isinstance\\(d,dict\\) else [m.get\\('\\\\''name'\\\\''\\) for m in d[:50]]\\)')",
+      "Bash(python3 -c 'import json; d=json.load\\(open\\('\\\\''/Users/dhavitgandhi/Desktop/raj-lakshmi/src/__TRACKED_VAR__'\\\\''\\)\\); [print\\(i+1,'\\\\''|'\\\\'', m.get\\('\\\\''title'\\\\'','\\\\''?'\\\\''\\),'\\\\''|'\\\\'', m.get\\('\\\\''src'\\\\'','\\\\'''\\\\''\\)[:90]\\) for i,m in enumerate\\(d\\)]')",
+      "Bash(python3 -c \"import json,sys; [print\\(m['name'],'|',m.get\\('src',''\\)[-60:]\\) for m in json.load\\(sys.stdin\\)]\")",
+      "Bash(python3)"
+    ]
+  }
+}

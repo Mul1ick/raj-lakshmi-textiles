@@ -99,8 +99,8 @@ export default function Enquiry() {
             <div className="mt-16 rounded-xl overflow-hidden grayscale contrast-125 opacity-90">
               <img
                 className="w-full h-64 object-cover"
-                alt="Close-up of a massive white marble block in a brightly lit Italian quarry atelier"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTLSdieRLrDuhpwPK70Ilj0m8eFBv3a7UWk3LbczDm5h5aRB7o6mC-6XeYAOMjGtngkduDdyVfHIWRfDBCDKELd6nWZJ4USaepCn8bT95aeROHQ_EOw67hi1GUhzdVMQ5lFTkM5iPE2b0Yd-ve1AACl0inQ7a7DigEkI_C5hhAa-jsFUdXnzewrqnMNx5sxvVwSsXgBRgrj14hhkyyc0bU-oRwRI3LFQN7Tsvl-ObTifkQeBwclJnIUi_UXZDWLvPUihIgkQtlBqCH"
+                alt="Close-up of a Crema Bella beige marble slab"
+                src="https://vinayakmarmointernational.com/wp-content/uploads/2024/01/Beige_6.jpg"
               />
             </div>
           </div>
