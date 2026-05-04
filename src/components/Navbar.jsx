@@ -44,7 +44,7 @@ export default function Navbar() {
           <img 
             src="/logo.png" 
             alt="Raj Lakshmi Marbles" 
-            className="h-8 md:h-10 w-auto hover:opacity-80 transition-opacity duration-300" 
+            className="h-12 md:h-14 w-auto hover:opacity-80 transition-opacity duration-300" 
           />
         </Link>
         

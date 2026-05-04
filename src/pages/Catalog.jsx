@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import StoneCard from '../components/StoneCard'
-import curatedMarbles from '../curated-marbles.json'
+import curatedMarbles from '../curated-marbles'
 
 const PAGE_SIZE = 12
 
@@ -75,11 +75,11 @@ export default function Catalog() {
           </div>
           <div className="max-w-sm">
             <p className="text-[#8A8A8F] leading-relaxed">
-              Our catalog features the rarest extractions from the heart of Carrara to the peaks of the Anatolian plateau. Each slab is a unique temporal record.
+              Our catalogue brings together the Raj Lakshmi collection across white, beige, grey, black, brown, and imported marbles. Each stone is selected for practical use, visual character, and long-term finish quality.
             </p>
             <div className="mt-6 flex items-center gap-4">
               <span className="h-[1px] w-12 bg-outline-variant"></span>
-              <span className="text-xs font-bold text-[#1C1C1E] tracking-widest">EST. 1984</span>
+              <span className="text-xs font-bold text-[#1C1C1E] tracking-widest">EST. 1988</span>
             </div>
           </div>
         </header>
@@ -108,7 +108,7 @@ export default function Catalog() {
             />
             {featured.slice(2, 5).map((stone) => (
               <StoneCard
-                key={stone.name}
+                key={`${stone.name}-${stone.src}`}
                 className="md:col-span-4"
                 aspectRatio="aspect-square"
                 title={stone.name}
@@ -147,7 +147,7 @@ export default function Catalog() {
           <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-opacity duration-300 ease-out ${transitioning ? 'opacity-0' : 'opacity-100'}`}>
             {pageItems.map((stone, idx) => (
               <button
-                key={stone.name}
+                key={`${stone.name}-${stone.src}`}
                 onClick={() => setActive(stone)}
                 className="group text-left"
               >
@@ -214,10 +214,10 @@ export default function Catalog() {
         <section className="mt-32 px-12 max-w-screen-2xl mx-auto">
           <div className="bg-white p-16 md:p-24 flex flex-col items-center text-center border border-[#e8bcb8]/10">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-8 max-w-2xl font-noto-serif">Require a bespoke consultation for your project?</h2>
-            <p className="text-[#8A8A8F] max-w-lg mb-12">Our specialists travel worldwide to assist architects and designers in selecting the perfect blocks for prestigious builds.</p>
+            <p className="text-[#8A8A8F] max-w-lg mb-12">Our specialists help homeowners, architects, and developers select the right marble for the project, fabrication requirements, and installation conditions.</p>
             <div className="flex flex-col sm:flex-row gap-6">
               <button className="bg-primary text-on-primary px-10 py-4 text-sm font-bold tracking-widest uppercase hover:scale-105 transition-transform">Request Catalog PDF</button>
-              <Link to="/enquiry" className="border-b-2 border-tertiary text-[#1C1C1E] px-4 py-4 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Book Atelier Visit</Link>
+              <Link to="/enquiry" className="border-b-2 border-tertiary text-[#1C1C1E] px-4 py-4 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Visit Raj Lakshmi</Link>
             </div>
           </div>
         </section>

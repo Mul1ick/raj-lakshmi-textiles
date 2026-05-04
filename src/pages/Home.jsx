@@ -1,6 +1,24 @@
 import { Link } from 'react-router-dom'
+import curatedMarbles from '../curated-marbles'
+import homeStatuarioMarbleHero from '../assets/site/home-statuario-marble-hero.jpg'
+import naturalStoneMacro from '../assets/site/natural-stone-macro.jpg'
+import rajLakshmiShowroom from '../assets/site/raj-lakshmi-showroom.jpg'
+import marbleSampleBook from '../assets/site/marble-sample-book.jpg'
 
 export default function Home() {
+  const findMarble = (name) => curatedMarbles.find((marble) => marble.name === name)
+  const legacyStats = [
+    { value: '40+', label: 'years of experience' },
+    { value: '100+', label: 'varieties' },
+    { value: '400 lakh+', label: 'sq. ft. stone sold' },
+  ]
+  const featuredCollections = [
+    findMarble('Statuario'),
+    findMarble('Black Rose'),
+    findMarble('Royal Beige'),
+  ].filter(Boolean)
+  const [primaryStone, secondaryStone, tertiaryStone] = featuredCollections
+
   return (
     <div className="bg-surface text-on-surface">
       {/* Hero Section */}
@@ -9,7 +27,7 @@ export default function Home() {
           <img
             className="w-full h-full object-cover"
             alt="Luxurious high-resolution close-up of Statuario marble with elegant gray veining on a pure white background with dramatic lighting"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFdcE2M007vRFBuUYn4w0fUWT0qb0_5MvMWobK524PtSuK1yIW-br0BEQl3GzwLLQsiqlCcMhY4DKNs3f7xFJNZNlQqWY3xdVjuL2STpCVQ8VQ-Ao0eDdGx1nsgDgbDq0luVm2qH6kngK-pMQDJrtD0-qqJ7CAj48DyYQF1C8DEKbmi5SL6rPq3uP3QI-aAoSdEDolPACHCiGPKbMR6t-jNWnL6-Xv-lJ1pAhJpGA5aNQwMC1AAtqXwr3zCF3J8YXmoK3DgNILyjfW"
+            src={homeStatuarioMarbleHero}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#F7F7F5] via-[#F7F7F5]/40 to-transparent"></div>
         </div>
@@ -20,7 +38,7 @@ export default function Home() {
               The Art of <br /><span className="text-[#bb0016]">Living Stone.</span>
             </h1>
             <p className="text-xl text-[#8A8A8F] font-body max-w-lg mb-10 leading-relaxed">
-              Sourcing the world's most prestigious natural stones to create timeless architectural masterpieces. Hand-picked, curated, and crafted for perfection.
+              Explore hand-selected white, beige, grey, black, brown, and imported marbles curated for homes, commercial spaces, and statement interiors.
             </p>
             <div className="flex items-center space-x-8">
               <Link
@@ -29,14 +47,40 @@ export default function Home() {
               >
                 DISCOVER THE COLLECTION
               </Link>
-              <button className="flex items-center space-x-3 group">
+              <Link to="/catalog" className="flex items-center space-x-3 group">
                 <span className="w-12 h-[1px] bg-[#1C1C1E] group-hover:w-16 transition-all"></span>
-                <span className="text-[#1C1C1E] font-bold text-xs tracking-widest">VIEW GALLERY</span>
-              </button>
+                <span className="text-[#1C1C1E] font-bold text-xs tracking-widest">VIEW CATALOGUE</span>
+              </Link>
             </div>
           </div>
         </div>
       </header>
+
+      <section className="relative z-10 bg-white border-y border-[#1C1C1E]/5">
+        <div className="max-w-screen-2xl mx-auto px-12 py-14">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1C1C1E]/10">
+            {legacyStats.map((stat, index) => (
+              <div key={stat.label} className="py-8 md:py-4 md:px-10 first:pt-0 last:pb-0 md:first:pt-4 md:last:pb-4">
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span
+                    className="typewriter-stat font-noto-serif text-5xl md:text-6xl font-black text-[#bb0016]"
+                    style={{ '--delay': `${index * 0.65}s`, '--chars': stat.value.length }}
+                  >
+                    {stat.value}
+                  </span>
+                </div>
+                <p
+                  className="typewriter-stat text-[#1C1C1E] text-sm font-extrabold tracking-[0.22em] uppercase"
+                  style={{ '--delay': `${index * 0.65 + 0.35}s`, '--chars': stat.label.length }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-32 bg-[#F7F7F5] relative overflow-hidden z-10">
         <div className="max-w-screen-2xl mx-auto px-12">
           {/* Section Header */}
@@ -48,7 +92,7 @@ export default function Home() {
               Where Decades of Experience Meet Modern Standards of Quality.
             </h2>
             <p className="text-lg text-[#8A8A8F] leading-relaxed max-w-2xl mx-auto">
-              With over 36 years of industry expertise, we have built a legacy rooted in trust, precision, and excellence. We don’t just provide products; we deliver peace of mind through a proven track record of reliability.
+              With over four decades of industry expertise, we have built a legacy rooted in trust, precision, and excellence. We don’t just provide products; we deliver peace of mind through a proven track record of reliability.
             </p>
           </div>
 
@@ -108,24 +152,24 @@ export default function Home() {
         <div className="max-w-screen-2xl mx-auto px-12">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-6">Curated Collections</h2>
-              <p className="text-[#8A8A8F] text-lg max-w-md">Our signature selection represents the pinnacle of geological rarity and aesthetic purity.</p>
+              <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-6">Our Marble Collections</h2>
+              <p className="text-[#8A8A8F] text-lg max-w-md">A focused selection from the same Raj Lakshmi catalogue: whites, beiges, greys, dramatic dark stones, and imported statement pieces.</p>
             </div>
             <div className="text-right">
-              <span className="block text-6xl font-noto-serif text-[#e2e3e1] leading-none mb-2">01/04</span>
-              <span className="text-xs font-bold tracking-widest text-[#F5B938]">WINTER RELEASE</span>
+              <span className="block text-6xl font-noto-serif text-[#e2e3e1] leading-none mb-2">{curatedMarbles.length}</span>
+              <span className="text-xs font-bold tracking-widest text-[#F5B938]">CATALOGUE STONES</span>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
             <div className="md:col-span-8 relative group overflow-hidden rounded-xl bg-surface-container-low">
               <img
                 className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                alt="Exquisite Calacatta Borghini marble slab featuring bold gold and grey veins on a creamy white surface in a luxury interior"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUC8v1u_zSVFgRSatlwSa1pvBmZYVPtZU6k0_5jBh4IyCFuLeeEbvvPwo-Khf2rBmbQ104dgSILEjvRC8Hxx5XbHQUCTmZf1Uqxz-hBxeQbW58r1wR7GpPUyGqLhn3gPMJdHzPdHnijEBGDGMDfU--nDW1zvFrY03IUU8m-Bbpk4zpMQuBjBpGYYoQpFeWJTTbub53-j64hIklkBF-vgdTmgXxQGH4cT1D7y8r1LQFSnUBtouLtXk2XC3rumdBh-77A5a7b6jNEFQp"
+                alt={`${primaryStone.name} ${primaryStone.category} marble slab`}
+                src={primaryStone.src}
               />
               <div className="absolute bottom-10 left-10 text-white z-10">
-                <span className="text-xs font-bold tracking-widest bg-[#bb0016] px-4 py-1 mb-4 inline-block">MOST COVETED</span>
-                <h3 className="text-4xl font-noto-serif font-bold">Italian Statuario</h3>
+                <span className="text-xs font-bold tracking-widest bg-[#bb0016] px-4 py-1 mb-4 inline-block">{primaryStone.category}</span>
+                <h3 className="text-4xl font-noto-serif font-bold">{primaryStone.name}</h3>
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1E]/60 to-transparent"></div>
             </div>
@@ -133,23 +177,25 @@ export default function Home() {
               <div className="relative group overflow-hidden rounded-xl bg-surface-container-low">
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                  alt="Rich deep green Brazilian quartzite with crystalline textures and light green emerald-like veins for luxury architectural use"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXZJJP9xI4336CqoPgbxJXopY5GiP4lrOaUDm6lTwm9rqtzM3nxxgYknSZ7evBY7aCIKuQRzxRB_Il5QtWwlxCLuOKVikpYSUUx_KMfTTkVUdbQTjSST_kfyRxYwBEWwLO5j9FJDXvc46tAflfmOPeAgewNVsv0U5shNi5sgY4H5JPlBr-y0xUJUMyPDv1ydLUEprvPbg8HGCG-KWE5A2RHPLHI4wTvn84vZnVwEAZq6Qr5mU5TB8mjb0fRUeNynpSSmzX0VjZtAcv"
+                  alt={`${secondaryStone.name} ${secondaryStone.category} marble slab`}
+                  src={secondaryStone.src}
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 <div className="absolute bottom-6 left-6 text-white">
-                  <h4 className="text-2xl font-noto-serif font-bold">Emerald Quartzite</h4>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#F5B938]">{secondaryStone.category}</span>
+                  <h4 className="text-2xl font-noto-serif font-bold">{secondaryStone.name}</h4>
                 </div>
               </div>
               <div className="relative group overflow-hidden rounded-xl bg-surface-container-low">
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                  alt="Dramatic black Nero Marquina marble with stark white lightning veins, polished to a high-gloss mirror finish"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuASefmmr8DFQiE-Vmc9z2vmDwr96nW6-cck3Lae1LthL0G5Hv721QEcV6SwHKpgn9sclkpBEYxShtWaoEILpPGu0DmT7IcwiZjVJyXokKP0NFMvPVE4Ccv8-oQqXqw1YKaC0ip4mcggW-dqxPRe43IuBsuPLiAHXcBsONGCS6RdGe-MrL_Kdy3pg44ayQ5fkn6MuK-xl4CSUnK3K_-ce-kGAlDpobXRSTpt1rDMxTFrXGnXjWzTbUNGbRfa5MbiwzpzeZNhQzNnFAv4"
+                  alt={`${tertiaryStone.name} ${tertiaryStone.category} marble slab`}
+                  src={tertiaryStone.src}
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 <div className="absolute bottom-6 left-6 text-white">
-                  <h4 className="text-2xl font-noto-serif font-bold">Nero Marquina</h4>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#F5B938]">{tertiaryStone.category}</span>
+                  <h4 className="text-2xl font-noto-serif font-bold">{tertiaryStone.name}</h4>
                 </div>
               </div>
             </div>
@@ -163,7 +209,7 @@ export default function Home() {
           <img
             className="w-full h-full object-cover mix-blend-overlay"
             alt="Extreme macro shot of natural stone texture with crystalline structures and metallic flecks under warm amber spotlight"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW9ganXFZsU-_Kj9KHvEL_YBI41TQPwjlkjyIv_Fr4d5iMWrjUL7NZCuXzbqV96Dg_Kl9Cj4XxlbqBzAFATk9we65N-6MafRY3yYmJ-5vwlb_ow_v5KH5H9O8R_5aNHqfTKToleb548Wne1nlvP6mlsBlj-L8NSUyTXtJINejAk2WKOvw8Ba9izu-gwQxVjBq6Fjx9X5K1eEbcNeR9yEuzGVpt1oupM4GIPq_2mWVCJV_aNX1-_8w-8S64uttrB1VeX12rxOpnPWw5"
+            src={naturalStoneMacro}
           />
         </div>
         <div className="max-w-screen-2xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -171,8 +217,8 @@ export default function Home() {
             <div className="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
               <img
                 className="w-full h-full object-cover"
-                alt="Modern high-end marble showroom atelier with floating stairs and large slab displays in a minimal industrial space"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbRHcmhp91Ex2kf0ICRa6cbIInI4rDTdR6cW9SQ468JPxboskzZ12qJZ2ni5H4-Jj0aUJQBke8AiXJ6otkZVg4fz6uvKyWH5OantNK9SQmGazA2Y3QraDez98_YL9uuTBhQJmvnP0qO_7yBFpuwt-pAVbo3_MpAZeV9ObbXBQ1FdvIdTrmdkceUTof6peN_JKWzDnvF4pYOWVPKsAKsHk0g2XzM5y9sFpdNxoWa0ggpkIb11M4-Ncl-uF-y244PmQGxqTA_P0jcCP3"
+                alt="Modern high-end Raj Lakshmi marble showroom with floating stairs and large slab displays in a minimal industrial space"
+                src={rajLakshmiShowroom}
               />
             </div>
             <div className="absolute -bottom-10 -right-10 p-10 bg-white/10 backdrop-blur-xl rounded-xl border border-white/10 max-w-xs shadow-2xl">
@@ -186,9 +232,9 @@ export default function Home() {
             <h2 className="text-5xl md:text-6xl font-noto-serif font-bold text-[#F7F7F5] leading-tight mb-10">Beyond the Surface.</h2>
             <div className="space-y-12">
               {[
-                { num: '01.', title: 'Global Sourcing', desc: 'Direct partnerships with quarries in Italy, Greece, and Turkey ensure exclusive access to the finest blocks.' },
-                { num: '02.', title: 'Artisanal Curation', desc: 'Every slab is inspected for vein continuity, structural integrity, and aesthetic balance.' },
-                { num: '03.', title: 'Lasting Legacy', desc: 'Our stones are chosen to endure, gaining character and value over generations.' },
+                { num: '01.', title: 'Catalogue Selection', desc: 'Choose from Raj Lakshmi whites, beiges, greys, black stones, brown tones, and imported feature marbles.' },
+                { num: '02.', title: 'Material Matching', desc: 'Every slab is reviewed for color consistency, vein movement, finish suitability, and the space it will serve.' },
+                { num: '03.', title: 'Installed Excellence', desc: 'From selection to fitting, the same team carries accountability through to the finished surface.' },
               ].map(({ num, title, desc }) => (
                 <div key={num} className="flex space-x-6">
                   <span className="text-[#bb0016] text-2xl font-noto-serif italic pt-1">{num}</span>
@@ -209,21 +255,17 @@ export default function Home() {
           <div className="bg-[#F7F7F5] p-16 md:p-24 rounded-2xl flex flex-col md:flex-row gap-20 items-center justify-between">
             <div className="max-w-xl">
               <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-8">Ready to define your space?</h2>
-              <p className="text-[#8A8A8F] text-lg mb-10">Join our mailing list for private previews of new quarry shipments and designer collaborations.</p>
-              <div className="flex space-x-4">
-                <input
-                  className="flex-1 bg-surface-container border-none focus:ring-0 text-on-surface font-body p-4 rounded-md"
-                  placeholder="Email Address"
-                  type="email"
-                />
-                <button className="bg-[#1C1C1E] text-[#F7F7F5] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:bg-[#bb0016] transition-colors">SUBSCRIBE</button>
+              <p className="text-[#8A8A8F] text-lg mb-10">Send us your project requirements and our team will help shortlist suitable marble options from the Raj Lakshmi catalogue.</p>
+              <div className="flex flex-col sm:flex-row gap-5">
+                <Link to="/catalog" className="border border-[#1C1C1E]/20 text-[#1C1C1E] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:border-[#1C1C1E] transition-colors text-center">VIEW CATALOGUE</Link>
+                <Link to="/enquiry" className="bg-[#1C1C1E] text-[#F7F7F5] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:bg-[#bb0016] transition-colors text-center">ENQUIRE</Link>
               </div>
             </div>
             <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden rotate-3 shadow-2xl">
               <img
                 className="w-full h-full object-cover"
                 alt="Flat lay of marble sample book with various stone swatches, architectural drawings, and a brass ruler on an architect's desk"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzUdjCIUTx4ehZJxw-WjoVgJ8_DMXnAriKLbXkqDOXO9Nlyi106tOX6qo9BX-bcm_Foc4P2agW4pmOL2uzM6O4MhX-mtUtn4o1bxxaVGZx65QW951cjIJaGbgztrjviQYn3GlqBaF975COedVOOVpdKgp2DyrTLZ6Hs_9KiGV5p4KinWDkB-jgDJYxDnR8dKM6HrEUPL5yaEyHTQSP97Gak9IbcFR2y8lCmyY0zqu6w4-8PiJgdkicKHn7tFYNx2Dw7IdxCzLhbqb-"
+                src={marbleSampleBook}
               />
             </div>
           </div>

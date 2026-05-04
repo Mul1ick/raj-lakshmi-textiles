@@ -1,10 +1,14 @@
 // https://script.google.com/macros/s/AKfycbwN83gPWHil5mAI8uXMUZpy3l0JfaqZKvLBoKPbMX1HGkFty0FnVq943WPxOflW99K3/exec
 import { useState } from 'react'
+import curatedMarbles from '../curated-marbles'
 
-const PALETTES = ['Calacatta Gold', 'Statuario', 'Nero Marquina', 'Carrara']
+const MATERIAL_OPTIONS = curatedMarbles.map((marble) => `${marble.name} - ${marble.category}`)
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 export default function Enquiry() {
-  const [selected, setSelected] = useState('Calacatta Gold')
+  const [selected, setSelected] = useState(MATERIAL_OPTIONS[0] ?? '')
+  const [emailTouched, setEmailTouched] = useState(false)
   
   // Manage the different states of our form submission
   const [submitStatus, setSubmitStatus] = useState('idle') // 'idle', 'submitting', 'success', 'error'
@@ -21,8 +25,18 @@ export default function Enquiry() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  const emailError = formData.email && !EMAIL_PATTERN.test(formData.email)
+    ? 'Enter a valid email address, for example name@company.com.'
+    : ''
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setEmailTouched(true)
+
+    if (!EMAIL_PATTERN.test(formData.email)) {
+      return
+    }
+
     setSubmitStatus('submitting')
 
     // Replace this with your actual Google Apps Script Web App URL
@@ -54,7 +68,8 @@ export default function Enquiry() {
         timeline: 'Immediate (1-3 months)',
         details: ''
       })
-      setSelected('Calacatta Gold')
+      setSelected(MATERIAL_OPTIONS[0] ?? '')
+      setEmailTouched(false)
       
     } catch (error) {
       console.error('Error submitting form:', error)
@@ -83,7 +98,7 @@ export default function Enquiry() {
                 </div>
                 <div>
                   <h3 className="text-[#1C1C1E] font-bold text-xl mb-1">Material Curation</h3>
-                  <p className="text-secondary text-sm">Access to exclusive quarries in Carrara, Tuscany, and beyond.</p>
+                  <p className="text-secondary text-sm">Guidance across white, beige, grey, dark, brown, and imported marble options from our catalogue.</p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
@@ -95,13 +110,6 @@ export default function Enquiry() {
                   <p className="text-secondary text-sm">Detailed load-bearing and chemical resistance consultations.</p>
                 </div>
               </div>
-            </div>
-            <div className="mt-16 rounded-xl overflow-hidden grayscale contrast-125 opacity-90">
-              <img
-                className="w-full h-64 object-cover"
-                alt="Close-up of a Crema Bella beige marble slab"
-                src="https://vinayakmarmointernational.com/wp-content/uploads/2024/01/Beige_6.jpg"
-              />
             </div>
           </div>
 
@@ -148,11 +156,20 @@ export default function Enquiry() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      onBlur={() => setEmailTouched(true)}
                       required
-                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40"
-                      placeholder="j.moore@studio.com"
+                      aria-invalid={Boolean(emailTouched && emailError)}
+                      className={`w-full bg-surface-container-low border-0 border-b focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40 ${
+                        emailTouched && emailError
+                          ? 'border-[#ba1a1a] focus:border-[#ba1a1a]'
+                          : 'border-transparent focus:border-primary'
+                      }`}
+                      placeholder="name@company.com"
                       type="email"
                     />
+                    {emailTouched && emailError && (
+                      <p className="text-xs text-[#ba1a1a] font-medium">{emailError}</p>
+                    )}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -186,22 +203,18 @@ export default function Enquiry() {
                 </div>
                 <div className="space-y-2">
                   <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Preferred Material Palette</label>
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    {PALETTES.map((p) => (
-                      <button
-                        key={p}
-                        type="button"
-                        onClick={() => setSelected(p)}
-                        className={`px-5 py-2 text-xs font-medium rounded-full transition-colors ${
-                          selected === p
-                            ? 'bg-primary text-white'
-                            : 'bg-surface-container-high text-secondary hover:bg-surface-container-highest'
-                        }`}
-                      >
-                        {p}
-                      </button>
+                  <select
+                    value={selected}
+                    onChange={(e) => setSelected(e.target.value)}
+                    required
+                    className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface"
+                  >
+                    {MATERIAL_OPTIONS.map((material, index) => (
+                      <option key={`${material}-${index}`} value={material}>
+                        {material}
+                      </option>
                     ))}
-                  </div>
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Details</label>
