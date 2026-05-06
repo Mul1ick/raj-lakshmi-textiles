@@ -27,6 +27,14 @@ body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .typewriter-stat {
   display: inline-block;
   width: 0;
@@ -36,7 +44,7 @@ body {
   border-right: 2px solid #bb0016;
   animation:
     typewriter-reveal 1.15s steps(var(--chars)) var(--delay, 0s) forwards,
-    typewriter-caret 0.8s step-end var(--delay, 0s) 4;
+    typewriter-caret-blink 2.4s step-end 2.8s forwards;
 }
 
 @keyframes typewriter-reveal {
@@ -44,9 +52,13 @@ body {
   to { width: 100%; }
 }
 
-@keyframes typewriter-caret {
-  0%, 100% { border-color: transparent; }
-  50% { border-color: #bb0016; }
+@keyframes typewriter-caret-blink {
+  0%   { border-color: #bb0016; }
+  20%  { border-color: transparent; }
+  40%  { border-color: #bb0016; }
+  60%  { border-color: transparent; }
+  80%  { border-color: #bb0016; }
+  100% { border-color: transparent; }
 }
 
 @media (prefers-reduced-motion: reduce) {

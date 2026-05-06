@@ -16,6 +16,7 @@ export default function Enquiry() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     projectType: 'Residential Interior',
     timeline: 'Immediate (1-3 months)',
     details: ''
@@ -64,6 +65,7 @@ export default function Enquiry() {
       setFormData({
         name: '',
         email: '',
+        phone: '',
         projectType: 'Residential Interior',
         timeline: 'Immediate (1-3 months)',
         details: ''
@@ -84,30 +86,33 @@ export default function Enquiry() {
           
           {/* Left Column */}
           <div className="lg:col-span-5 pt-8">
-            <span className="text-tertiary font-semibold tracking-widest text-xs uppercase mb-4 block">Consultation</span>
-            <h1 className="text-5xl lg:text-7xl font-bold text-[#1C1C1E] leading-tight mb-8 font-noto-serif">
-              Shape Your Vision <br />in Stone.
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-px w-10 bg-[#EF2029]" />
+              <span className="text-[#EF2029] font-bold tracking-[0.25em] text-[11px] uppercase">Consultation</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold text-[#1C1C1E] leading-[1.05] tracking-tight mb-10 font-noto-serif">
+              Shape Your Vision <br /><em className="not-italic text-[#EF2029]">in Stone.</em>
             </h1>
-            <p className="text-secondary text-lg leading-relaxed mb-12 max-w-md">
+            <p className="font-noto-serif text-[#3A3A3C] text-xl leading-[1.7] mb-14 max-w-md">
               Our curators and master stonemasons are ready to assist in selecting the perfect slab for your architectural masterpiece. Professional guidance for global logistics and bespoke finishing.
             </p>
-            <div className="space-y-8">
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 bg-surface-container flex items-center justify-center rounded-xl">
-                  <span className="material-symbols-outlined text-primary">palette</span>
+            <div className="space-y-10 border-l border-[#1C1C1E]/10 pl-8">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-[#1C1C1E] flex items-center justify-center rounded-md shrink-0">
+                  <span className="material-symbols-outlined text-[#F5B938]">palette</span>
                 </div>
                 <div>
-                  <h3 className="text-[#1C1C1E] font-bold text-xl mb-1">Material Curation</h3>
-                  <p className="text-secondary text-sm">Guidance across white, beige, grey, dark, brown, and imported marble options from our catalogue.</p>
+                  <h3 className="text-[#1C1C1E] font-bold text-lg mb-1.5 font-noto-serif">Material Curation</h3>
+                  <p className="text-[#5A5A5F] text-sm leading-relaxed">Guidance across white, beige, grey, dark, brown, and imported marble options from our catalogue.</p>
                 </div>
               </div>
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 bg-surface-container flex items-center justify-center rounded-xl">
-                  <span className="material-symbols-outlined text-primary">architecture</span>
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-[#1C1C1E] flex items-center justify-center rounded-md shrink-0">
+                  <span className="material-symbols-outlined text-[#F5B938]">architecture</span>
                 </div>
                 <div>
-                  <h3 className="text-[#1C1C1E] font-bold text-xl mb-1">Technical Advisory</h3>
-                  <p className="text-secondary text-sm">Detailed load-bearing and chemical resistance consultations.</p>
+                  <h3 className="text-[#1C1C1E] font-bold text-lg mb-1.5 font-noto-serif">Technical Advisory</h3>
+                  <p className="text-[#5A5A5F] text-sm leading-relaxed">Detailed load-bearing and chemical resistance consultations.</p>
                 </div>
               </div>
             </div>
@@ -136,22 +141,22 @@ export default function Enquiry() {
             ) : (
               
               /* Default Form UI */
-              <form onSubmit={handleSubmit} className="space-y-8 transition-all duration-700 ease-in-out w-full">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <form onSubmit={handleSubmit} className="space-y-7 transition-all duration-700 ease-in-out w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Full Name</label>
+                    <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Full Name</label>
                     <input
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40"
+                      className="w-full bg-[#F7F7F5] border border-[#1C1C1E]/8 focus:border-[#1C1C1E] focus:bg-white focus:ring-0 transition-all px-4 py-3.5 text-[#1C1C1E] placeholder:text-[#8A8A8F]/60 rounded-md"
                       placeholder="Julianne Moore"
                       type="text"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Email Address</label>
+                    <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Email Address</label>
                     <input
                       name="email"
                       value={formData.email}
@@ -159,10 +164,10 @@ export default function Enquiry() {
                       onBlur={() => setEmailTouched(true)}
                       required
                       aria-invalid={Boolean(emailTouched && emailError)}
-                      className={`w-full bg-surface-container-low border-0 border-b focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40 ${
+                      className={`w-full bg-[#F7F7F5] border focus:bg-white focus:ring-0 transition-all px-4 py-3.5 text-[#1C1C1E] placeholder:text-[#8A8A8F]/60 rounded-md ${
                         emailTouched && emailError
                           ? 'border-[#ba1a1a] focus:border-[#ba1a1a]'
-                          : 'border-transparent focus:border-primary'
+                          : 'border-[#1C1C1E]/8 focus:border-[#1C1C1E]'
                       }`}
                       placeholder="name@company.com"
                       type="email"
@@ -172,14 +177,33 @@ export default function Enquiry() {
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Phone Number</label>
+                  <div className="flex items-stretch rounded-md overflow-hidden border border-[#1C1C1E]/8 focus-within:border-[#1C1C1E] bg-[#F7F7F5] focus-within:bg-white transition-all">
+                    <span className="flex items-center px-4 bg-[#1C1C1E] text-white text-sm font-bold tracking-wider select-none">
+                      +91
+                    </span>
+                    <input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
+                      required
+                      pattern="[0-9]{10}"
+                      inputMode="numeric"
+                      className="flex-1 bg-transparent border-0 focus:ring-0 px-4 py-3.5 text-[#1C1C1E] placeholder:text-[#8A8A8F]/60"
+                      placeholder="98765 43210"
+                      type="tel"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Type</label>
-                    <select 
+                    <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Project Type</label>
+                    <select
                       name="projectType"
                       value={formData.projectType}
                       onChange={handleChange}
-                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface"
+                      className="w-full bg-[#F7F7F5] border border-[#1C1C1E]/8 focus:border-[#1C1C1E] focus:bg-white focus:ring-0 transition-all px-4 py-3.5 text-[#1C1C1E] rounded-md appearance-none"
                     >
                       <option>Residential Interior</option>
                       <option>Commercial Lobby</option>
@@ -188,12 +212,12 @@ export default function Enquiry() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Estimated Timeline</label>
-                    <select 
+                    <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Estimated Timeline</label>
+                    <select
                       name="timeline"
                       value={formData.timeline}
                       onChange={handleChange}
-                      className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface"
+                      className="w-full bg-[#F7F7F5] border border-[#1C1C1E]/8 focus:border-[#1C1C1E] focus:bg-white focus:ring-0 transition-all px-4 py-3.5 text-[#1C1C1E] rounded-md appearance-none"
                     >
                       <option>Immediate (1-3 months)</option>
                       <option>Planning (3-6 months)</option>
@@ -202,12 +226,12 @@ export default function Enquiry() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Preferred Material Palette</label>
+                  <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Preferred Material Palette</label>
                   <select
                     value={selected}
                     onChange={(e) => setSelected(e.target.value)}
                     required
-                    className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface"
+                    className="w-full bg-[#F7F7F5] border border-[#1C1C1E]/8 focus:border-[#1C1C1E] focus:bg-white focus:ring-0 transition-all px-4 py-3.5 text-[#1C1C1E] rounded-md appearance-none"
                   >
                     {MATERIAL_OPTIONS.map((material, index) => (
                       <option key={`${material}-${index}`} value={material}>
@@ -217,13 +241,13 @@ export default function Enquiry() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#8A8A8F] uppercase tracking-wider">Project Details</label>
+                  <label className="block text-[10px] font-bold text-[#1C1C1E] uppercase tracking-[0.18em]">Project Details</label>
                   <textarea
                     name="details"
                     value={formData.details}
                     onChange={handleChange}
                     required
-                    className="w-full bg-surface-container-low border-0 border-b border-transparent focus:border-primary focus:ring-0 transition-all px-0 py-3 text-on-surface placeholder:text-secondary/40 resize-none"
+                    className="w-full bg-[#F7F7F5] border border-[#1C1C1E]/8 focus:border-[#1C1C1E] focus:bg-white focus:ring-0 transition-all px-4 py-3.5 text-[#1C1C1E] placeholder:text-[#8A8A8F]/60 rounded-md resize-none"
                     placeholder="Describe the architectural intent and specific requirements..."
                     rows={4}
                   />

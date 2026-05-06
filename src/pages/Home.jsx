@@ -1,23 +1,24 @@
-import { Link } from 'react-router-dom'
-import curatedMarbles from '../curated-marbles'
-import homeStatuarioMarbleHero from '../assets/site/home-statuario-marble-hero.jpg'
-import naturalStoneMacro from '../assets/site/natural-stone-macro.jpg'
-import rajLakshmiShowroom from '../assets/site/raj-lakshmi-showroom.jpg'
-import marbleSampleBook from '../assets/site/marble-sample-book.jpg'
+import { Link } from "react-router-dom";
+import curatedMarbles from "../curated-marbles";
+import homeStatuarioMarbleHero from "../assets/site/home-statuario-marble-hero.jpg";
+import naturalStoneMacro from "../assets/site/natural-stone-macro.jpg";
+import rajLakshmiShowroom from "../assets/site/raj-lakshmi-showroom.jpg";
+import marbleSampleBook from "../assets/site/marble-sample-book.jpg";
 
 export default function Home() {
-  const findMarble = (name) => curatedMarbles.find((marble) => marble.name === name)
+  const findMarble = (name) =>
+    curatedMarbles.find((marble) => marble.name === name);
   const legacyStats = [
-    { value: '40+', label: 'years of experience' },
-    { value: '100+', label: 'varieties' },
-    { value: '400 lakh+', label: 'sq. ft. stone sold' },
-  ]
+    { value: "40+", label: "years of experience", letter: "R" },
+    { value: "100+", label: "varieties", letter: "L" },
+    { value: "400 lakh+", label: "sq. ft. stone sold", letter: "M" },
+  ];
   const featuredCollections = [
-    findMarble('Statuario'),
-    findMarble('Black Rose'),
-    findMarble('Royal Beige'),
-  ].filter(Boolean)
-  const [primaryStone, secondaryStone, tertiaryStone] = featuredCollections
+    findMarble("Moon Cream"),
+    findMarble("Black Rose"),
+    findMarble("Royal Beige"),
+  ].filter(Boolean);
+  const [primaryStone, secondaryStone, tertiaryStone] = featuredCollections;
 
   return (
     <div className="bg-surface text-on-surface">
@@ -33,12 +34,17 @@ export default function Home() {
         </div>
         <div className="relative z-10 w-full max-w-screen-2xl mx-auto px-12 lg:px-24">
           <div className="max-w-3xl">
-            <span className="inline-block text-[#F5B938] font-bold tracking-[0.2em] text-xs mb-6 font-body">ESTABLISHED 1988 — RAJ LAKSHMI MARBLES</span>
+            <span className="inline-block text-[#F5B938] font-bold tracking-[0.2em] text-xs mb-6 font-body">
+              ESTABLISHED 1988 — RAJ LAKSHMI MARBLES
+            </span>
             <h1 className="text-7xl md:text-8xl font-noto-serif font-black text-[#1C1C1E] leading-[0.95] tracking-tight mb-8">
-              The Art of <br /><span className="text-[#bb0016]">Living Stone.</span>
+              The Art of <br />
+              <span className="text-[#bb0016]">Living Stone.</span>
             </h1>
             <p className="text-xl text-[#8A8A8F] font-body max-w-lg mb-10 leading-relaxed">
-              Explore hand-selected white, beige, grey, black, brown, and imported marbles curated for homes, commercial spaces, and statement interiors.
+              Explore hand-selected white, beige, grey, black, brown, and
+              imported marbles curated for homes, commercial spaces, and
+              statement interiors.
             </p>
             <div className="flex items-center space-x-8">
               <Link
@@ -49,7 +55,9 @@ export default function Home() {
               </Link>
               <Link to="/catalog" className="flex items-center space-x-3 group">
                 <span className="w-12 h-[1px] bg-[#1C1C1E] group-hover:w-16 transition-all"></span>
-                <span className="text-[#1C1C1E] font-bold text-xs tracking-widest">VIEW CATALOGUE</span>
+                <span className="text-[#1C1C1E] font-bold text-xs tracking-widest">
+                  VIEW CATALOGUE
+                </span>
               </Link>
             </div>
           </div>
@@ -60,18 +68,37 @@ export default function Home() {
         <div className="max-w-screen-2xl mx-auto px-12 py-14">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1C1C1E]/10">
             {legacyStats.map((stat, index) => (
-              <div key={stat.label} className="py-8 md:py-4 md:px-10 first:pt-0 last:pb-0 md:first:pt-4 md:last:pb-4">
-                <div className="flex items-baseline gap-3 mb-3">
+              <div
+                key={stat.label}
+                className="relative py-8 md:py-4 md:px-10 first:pt-0 last:pb-0 md:first:pt-4 md:last:pb-4 overflow-hidden"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none select-none absolute inset-0 flex items-center justify-center font-noto-serif font-black leading-none"
+                  style={{
+                    fontSize: "clamp(7rem, 12vw, 12rem)",
+                    color: "rgba(187, 0, 22, 0.09)",
+                  }}
+                >
+                  {stat.letter}
+                </span>
+                <div className="relative flex items-baseline gap-3 mb-3">
                   <span
                     className="typewriter-stat font-noto-serif text-5xl md:text-6xl font-black text-[#bb0016]"
-                    style={{ '--delay': `${index * 0.65}s`, '--chars': stat.value.length }}
+                    style={{
+                      "--delay": `${index * 0.65}s`,
+                      "--chars": stat.value.length,
+                    }}
                   >
                     {stat.value}
                   </span>
                 </div>
                 <p
-                  className="typewriter-stat text-[#1C1C1E] text-sm font-extrabold tracking-[0.22em] uppercase"
-                  style={{ '--delay': `${index * 0.65 + 0.35}s`, '--chars': stat.label.length }}
+                  className="relative typewriter-stat text-[#1C1C1E] text-sm font-extrabold tracking-[0.22em] uppercase"
+                  style={{
+                    "--delay": `${index * 0.65 + 0.35}s`,
+                    "--chars": stat.label.length,
+                  }}
                 >
                   {stat.label}
                 </p>
@@ -92,72 +119,108 @@ export default function Home() {
               Where Decades of Experience Meet Modern Standards of Quality.
             </h2>
             <p className="text-lg text-[#8A8A8F] leading-relaxed max-w-2xl mx-auto">
-              With over four decades of industry expertise, we have built a legacy rooted in trust, precision, and excellence. We don’t just provide products; we deliver peace of mind through a proven track record of reliability.
+              With over four decades of industry expertise, we have built a
+              legacy rooted in trust, precision, and excellence. We don’t just
+              provide products; we deliver peace of mind through a proven track
+              record of reliability.
             </p>
           </div>
 
           {/* Feature Grid - Glassmorphism Aesthetic */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
             {/* Card 1 */}
             <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
               <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">verified</span>
+                <span className="material-symbols-outlined text-[28px]">
+                  verified
+                </span>
               </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">Uncompromising Quality</h3>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
+                Uncompromising Quality
+              </h3>
               <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                Our reputation is built on "top-notch" standards. We implement rigorous quality control measures to ensure that every product meets the highest benchmarks of durability and performance.
+                Our reputation is built on "top-notch" standards. We implement
+                rigorous quality control measures to ensure that every product
+                meets the highest benchmarks of durability and performance.
               </p>
             </div>
 
             {/* Card 2 */}
             <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
               <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">account_balance</span>
+                <span className="material-symbols-outlined text-[28px]">
+                  account_balance
+                </span>
               </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">True Value for Money</h3>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
+                True Value for Money
+              </h3>
               <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                Premium quality shouldn't come with an unreasonable price tag. Our streamlined processes and deep industry roots allow us to offer high-end solutions that maximize your investment.
+                Premium quality shouldn't come with an unreasonable price tag.
+                Our streamlined processes and deep industry roots allow us to
+                offer high-end solutions that maximize your investment.
               </p>
             </div>
 
             {/* Card 3 */}
             <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
               <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">history_edu</span>
+                <span className="material-symbols-outlined text-[28px]">
+                  history_edu
+                </span>
               </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">Decades of Mastery</h3>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
+                Decades of Mastery
+              </h3>
               <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                Three and a half decades in the business means we’ve seen the industry evolve. We leverage this deep institutional knowledge to anticipate challenges and provide unmatched insights.
+                Three and a half decades in the business means we’ve seen the
+                industry evolve. We leverage this deep institutional knowledge
+                to anticipate challenges and provide unmatched insights.
               </p>
             </div>
 
             {/* Card 4 */}
             <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
               <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">handshake</span>
+                <span className="material-symbols-outlined text-[28px]">
+                  handshake
+                </span>
               </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">Client-Centric Excellence</h3>
+              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
+                Client-Centric Excellence
+              </h3>
               <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                We are known for our commitment to the end result. Our focus remains on delivering products that provide long-term utility, ensuring our value proposition extends far beyond the initial purchase.
+                We are known for our commitment to the end result. Our focus
+                remains on delivering products that provide long-term utility,
+                ensuring our value proposition extends far beyond the initial
+                purchase.
               </p>
             </div>
-
           </div>
         </div>
       </section>
 
       {/* Curator's Selection (Bento Grid) */}
-      <section className="py-32 bg-[#F7F7F5]">
+      <section className="py-12 bg-[#F7F7F5]">
         <div className="max-w-screen-2xl mx-auto px-12">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-6">Our Marble Collections</h2>
-              <p className="text-[#8A8A8F] text-lg max-w-md">A focused selection from the same Raj Lakshmi catalogue: whites, beiges, greys, dramatic dark stones, and imported statement pieces.</p>
+              <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-6">
+                Our Marble Collections
+              </h2>
+              <p className="text-[#8A8A8F] text-lg max-w-md">
+                A focused selection from the same Raj Lakshmi catalogue: whites,
+                beiges, greys, dramatic dark stones, and imported statement
+                pieces.
+              </p>
             </div>
             <div className="text-right">
-              <span className="block text-6xl font-noto-serif text-[#e2e3e1] leading-none mb-2">{curatedMarbles.length}</span>
-              <span className="text-xs font-bold tracking-widest text-[#F5B938]">CATALOGUE STONES</span>
+              <span className="block text-6xl font-noto-serif text-[#e2e3e1] leading-none mb-2">
+                {curatedMarbles.length}
+              </span>
+              <span className="text-xs font-bold tracking-widest text-[#F5B938]">
+                CATALOGUE STONES
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
@@ -168,8 +231,12 @@ export default function Home() {
                 src={primaryStone.src}
               />
               <div className="absolute bottom-10 left-10 text-white z-10">
-                <span className="text-xs font-bold tracking-widest bg-[#bb0016] px-4 py-1 mb-4 inline-block">{primaryStone.category}</span>
-                <h3 className="text-4xl font-noto-serif font-bold">{primaryStone.name}</h3>
+                <span className="text-xs font-bold tracking-widest bg-[#bb0016] px-4 py-1 mb-4 inline-block">
+                  {primaryStone.category}
+                </span>
+                <h3 className="text-4xl font-noto-serif font-bold">
+                  {primaryStone.name}
+                </h3>
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1E]/60 to-transparent"></div>
             </div>
@@ -182,8 +249,12 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 <div className="absolute bottom-6 left-6 text-white">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#F5B938]">{secondaryStone.category}</span>
-                  <h4 className="text-2xl font-noto-serif font-bold">{secondaryStone.name}</h4>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#F5B938]">
+                    {secondaryStone.category}
+                  </span>
+                  <h4 className="text-2xl font-noto-serif font-bold">
+                    {secondaryStone.name}
+                  </h4>
                 </div>
               </div>
               <div className="relative group overflow-hidden rounded-xl bg-surface-container-low">
@@ -194,8 +265,12 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 <div className="absolute bottom-6 left-6 text-white">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#F5B938]">{tertiaryStone.category}</span>
-                  <h4 className="text-2xl font-noto-serif font-bold">{tertiaryStone.name}</h4>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#F5B938]">
+                    {tertiaryStone.category}
+                  </span>
+                  <h4 className="text-2xl font-noto-serif font-bold">
+                    {tertiaryStone.name}
+                  </h4>
                 </div>
               </div>
             </div>
@@ -203,7 +278,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section */}
+      {/* Experience Section
       <section className="relative py-40 overflow-hidden bg-[#1C1C1E]">
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-30">
           <img
@@ -247,18 +322,34 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Inquiry Section */}
       <section className="py-32 bg-surface-container-low">
         <div className="max-w-screen-2xl mx-auto px-12">
           <div className="bg-[#F7F7F5] p-16 md:p-24 rounded-2xl flex flex-col md:flex-row gap-20 items-center justify-between">
             <div className="max-w-xl">
-              <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-8">Ready to define your space?</h2>
-              <p className="text-[#8A8A8F] text-lg mb-10">Send us your project requirements and our team will help shortlist suitable marble options from the Raj Lakshmi catalogue.</p>
+              <h2 className="text-5xl font-noto-serif font-bold text-[#1C1C1E] mb-8">
+                Ready to define your space?
+              </h2>
+              <p className="text-[#8A8A8F] text-lg mb-10">
+                Send us your project requirements and our team will help
+                shortlist suitable marble options from the Raj Lakshmi
+                catalogue.
+              </p>
               <div className="flex flex-col sm:flex-row gap-5">
-                <Link to="/catalog" className="border border-[#1C1C1E]/20 text-[#1C1C1E] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:border-[#1C1C1E] transition-colors text-center">VIEW CATALOGUE</Link>
-                <Link to="/enquiry" className="bg-[#1C1C1E] text-[#F7F7F5] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:bg-[#bb0016] transition-colors text-center">ENQUIRE</Link>
+                <Link
+                  to="/catalog"
+                  className="border border-[#1C1C1E]/20 text-[#1C1C1E] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:border-[#1C1C1E] transition-colors text-center"
+                >
+                  VIEW CATALOGUE
+                </Link>
+                <Link
+                  to="/enquiry"
+                  className="bg-[#1C1C1E] text-[#F7F7F5] px-8 py-4 rounded-md font-bold text-sm tracking-widest hover:bg-[#bb0016] transition-colors text-center"
+                >
+                  ENQUIRE
+                </Link>
               </div>
             </div>
             <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden rotate-3 shadow-2xl">
@@ -272,5 +363,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
