@@ -10,13 +10,13 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <Link
               to="/"
-              className="inline-flex w-fit shrink-0 bg-[#F7F7F5] p-3 rounded-md"
+              className="inline-flex w-fit shrink-0"
               aria-label="Raj Lakshmi Marbles home"
             >
               <img
-                src="/logo-cropped.png"
+                src="/logo-footer-white.png"
                 alt="Raj Lakshmi Marbles"
-                className="h-14 md:h-16 w-auto"
+                className="h-16 md:h-20 w-auto opacity-95"
               />
             </Link>
             <p className="max-w-md text-base leading-7 text-[#D7D2C8]">
