@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import StoneCard from '../components/StoneCard'
 import curatedMarbles from '../curated-marbles'
+import { downloadCataloguePdf } from '../utils/catalogPdf'
 
 const PAGE_SIZE = 12
 
@@ -10,7 +11,17 @@ export default function Catalog() {
   const [filter, setFilter] = useState('All')
   const [active, setActive] = useState(null)
   const [transitioning, setTransitioning] = useState(false)
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
   const sectionRef = useRef(null)
+
+  const handleDownloadCatalogue = async () => {
+    setIsGeneratingPdf(true)
+    try {
+      await downloadCataloguePdf()
+    } finally {
+      setIsGeneratingPdf(false)
+    }
+  }
 
   const goToPage = (p) => {
     if (p === page) return
@@ -216,7 +227,14 @@ export default function Catalog() {
             <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-8 max-w-2xl font-noto-serif">Require a bespoke consultation for your project?</h2>
             <p className="text-[#8A8A8F] max-w-lg mb-12">Our specialists help homeowners, architects, and developers select the right marble for the project, fabrication requirements, and installation conditions.</p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <button className="bg-primary text-on-primary px-10 py-4 text-sm font-bold tracking-widest uppercase hover:scale-105 transition-transform">Request Catalog PDF</button>
+              <button
+                type="button"
+                onClick={handleDownloadCatalogue}
+                disabled={isGeneratingPdf}
+                className="bg-primary text-on-primary px-10 py-4 text-sm font-bold tracking-widest uppercase hover:scale-105 transition-transform disabled:cursor-wait disabled:opacity-70 disabled:hover:scale-100"
+              >
+                {isGeneratingPdf ? 'Preparing PDF...' : 'Request Catalogue PDF'}
+              </button>
               <Link to="/enquiry" className="border-b-2 border-tertiary text-[#1C1C1E] px-4 py-4 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Visit Raj Lakshmi</Link>
             </div>
           </div>

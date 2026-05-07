@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import WhatsAppFloat from './components/WhatsAppFloat'
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
 import Clients from './pages/Clients'
@@ -40,6 +41,7 @@ export default function App() {
       <ScrollToTop />
       <Navbar />
       <AppRoutes />
+      <WhatsAppFloat />
       <Footer />
     </BrowserRouter>
   )
