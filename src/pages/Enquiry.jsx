@@ -93,27 +93,38 @@ export default function Enquiry() {
             <h1 className="text-5xl lg:text-7xl font-bold text-[#1C1C1E] leading-[1.05] tracking-tight mb-10 font-noto-serif">
               Shape Your Vision <br /><em className="not-italic text-[#EF2029]">in Stone.</em>
             </h1>
-            <p className="font-noto-serif text-[#3A3A3C] text-xl leading-[1.7] mb-14 max-w-md">
-              Our curators and master stonemasons are ready to assist in selecting the perfect slab for your architectural masterpiece. Professional guidance for global logistics and bespoke finishing.
+            <p className="font-noto-serif text-[#3A3A3C] text-xl leading-[1.7] mb-12 max-w-md">
+              Tell us what you are building, the look you have in mind, and any
+              marble you already like. We will help shortlist suitable options
+              from the Raj Lakshmi catalogue.
             </p>
-            <div className="space-y-10 border-l border-[#1C1C1E]/10 pl-8">
-              <div className="flex items-start gap-5">
-                <div className="w-12 h-12 bg-[#1C1C1E] flex items-center justify-center rounded-md shrink-0">
-                  <span className="material-symbols-outlined text-[#F5B938]">palette</span>
-                </div>
-                <div>
-                  <h3 className="text-[#1C1C1E] font-bold text-lg mb-1.5 font-noto-serif">Material Curation</h3>
-                  <p className="text-[#5A5A5F] text-sm leading-relaxed">Guidance across white, beige, grey, dark, brown, and imported marble options from our catalogue.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-5">
-                <div className="w-12 h-12 bg-[#1C1C1E] flex items-center justify-center rounded-md shrink-0">
-                  <span className="material-symbols-outlined text-[#F5B938]">architecture</span>
-                </div>
-                <div>
-                  <h3 className="text-[#1C1C1E] font-bold text-lg mb-1.5 font-noto-serif">Technical Advisory</h3>
-                  <p className="text-[#5A5A5F] text-sm leading-relaxed">Detailed load-bearing and chemical resistance consultations.</p>
-                </div>
+            <div className="max-w-md border-y border-[#1C1C1E]/10 py-6">
+              <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-[#bb0016]">
+                We can help with
+              </p>
+              <div className="space-y-3">
+                {[
+                  ["Material shortlist", "Find matching marble options from the catalogue."],
+                  ["Finish direction", "Choose polished, honed, leathered, or custom surfaces."],
+                  ["Project fit", "Align slab size, quantity, and timing with your site."],
+                ].map(([title, copy]) => (
+                  <div
+                    key={title}
+                    className="group grid grid-cols-[1.75rem_1fr] gap-4 border-t border-[#1C1C1E]/10 pt-3 first:border-t-0 first:pt-0"
+                  >
+                    <span className="material-symbols-outlined mt-1 text-base text-[#bb0016] transition-transform group-hover:translate-x-1">
+                      arrow_forward
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-bold text-[#1C1C1E]">
+                        {title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-6 text-[#5A5A5F]">
+                        {copy}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

@@ -13,6 +13,24 @@ export default function Home() {
     { value: "100+", label: "varieties", letter: "L" },
     { value: "400 lakh+", label: "sq. ft. stone sold", letter: "M" },
   ];
+  const legacyPillars = [
+    {
+      title: "Uncompromising Quality",
+      copy: `Our reputation is built on "top-notch" standards. We implement rigorous quality control measures to ensure that every product meets the highest benchmarks of durability and performance.`,
+    },
+    {
+      title: "True Value for Money",
+      copy: "Premium quality shouldn't come with an unreasonable price tag. Our streamlined processes and deep industry roots allow us to offer high-end solutions that maximize your investment.",
+    },
+    {
+      title: "Decades of Mastery",
+      copy: "Three and a half decades in the business means we've seen the industry evolve. We leverage this deep institutional knowledge to anticipate challenges and provide unmatched insights.",
+    },
+    {
+      title: "Client-Centric Excellence",
+      copy: "We are known for our commitment to the end result. Our focus remains on delivering products that provide long-term utility, ensuring our value proposition extends far beyond the initial purchase.",
+    },
+  ];
   const featuredCollections = [
     findMarble("Moon Cream"),
     findMarble("Black Rose"),
@@ -126,82 +144,32 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Feature Grid - Glassmorphism Aesthetic */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
-              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">
-                  verified
-                </span>
-              </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
-                Uncompromising Quality
-              </h3>
-              <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                Our reputation is built on "top-notch" standards. We implement
-                rigorous quality control measures to ensure that every product
-                meets the highest benchmarks of durability and performance.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
-              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">
-                  account_balance
-                </span>
-              </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
-                True Value for Money
-              </h3>
-              <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                Premium quality shouldn't come with an unreasonable price tag.
-                Our streamlined processes and deep industry roots allow us to
-                offer high-end solutions that maximize your investment.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
-              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">
-                  history_edu
-                </span>
-              </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
-                Decades of Mastery
-              </h3>
-              <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                Three and a half decades in the business means we’ve seen the
-                industry evolve. We leverage this deep institutional knowledge
-                to anticipate challenges and provide unmatched insights.
-              </p>
-            </div>
-
-            {/* Card 4 */}
-            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-8 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group">
-              <div className="w-14 h-14 rounded-full bg-[#f4f4f2] flex items-center justify-center mb-6 group-hover:bg-[#1C1C1E] group-hover:text-white transition-colors duration-500">
-                <span className="material-symbols-outlined text-[28px]">
-                  handshake
-                </span>
-              </div>
-              <h3 className="text-xl font-bold font-noto-serif text-[#1C1C1E] mb-3">
-                Client-Centric Excellence
-              </h3>
-              <p className="text-sm text-[#8A8A8F] leading-relaxed">
-                We are known for our commitment to the end result. Our focus
-                remains on delivering products that provide long-term utility,
-                ensuring our value proposition extends far beyond the initial
-                purchase.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-y border-[#1C1C1E]/10">
+            {legacyPillars.map((pillar, index) => (
+              <article
+                key={pillar.title}
+                className="group border-b border-[#1C1C1E]/10 px-0 py-8 md:border-r md:px-7 lg:border-b-0 lg:last:border-r-0"
+              >
+                <div className="mb-10 flex items-center justify-between">
+                  <span className="text-[11px] font-extrabold tracking-[0.24em] text-[#bb0016]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="h-px w-12 bg-[#1C1C1E]/15 transition-colors group-hover:bg-[#bb0016]" />
+                </div>
+                <h3 className="mb-4 max-w-[14rem] font-noto-serif text-2xl font-bold leading-tight text-[#1C1C1E]">
+                  {pillar.title}
+                </h3>
+                <p className="text-sm leading-7 text-[#6F6F73]">
+                  {pillar.copy}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Curator's Selection (Bento Grid) */}
-      <section className="py-12 bg-[#F7F7F5]">
+      <section className="py-6 bg-[#F7F7F5]">
         <div className="max-w-screen-2xl mx-auto px-12">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <div className="max-w-2xl">
@@ -278,54 +246,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section
-      <section className="relative py-40 overflow-hidden bg-[#1C1C1E]">
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-30">
-          <img
-            className="w-full h-full object-cover mix-blend-overlay"
-            alt="Extreme macro shot of natural stone texture with crystalline structures and metallic flecks under warm amber spotlight"
-            src={naturalStoneMacro}
-          />
-        </div>
-        <div className="max-w-screen-2xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-          <div className="relative">
-            <div className="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
-              <img
-                className="w-full h-full object-cover"
-                alt="Modern high-end Raj Lakshmi marble showroom with floating stairs and large slab displays in a minimal industrial space"
-                src={rajLakshmiShowroom}
-              />
-            </div>
-            <div className="absolute -bottom-10 -right-10 p-10 bg-white/10 backdrop-blur-xl rounded-xl border border-white/10 max-w-xs shadow-2xl">
-              <span className="material-symbols-outlined text-[#F5B938] text-4xl mb-4">architecture</span>
-              <h5 className="text-[#F7F7F5] font-noto-serif text-xl mb-3">Custom Fabrication</h5>
-              <p className="text-[#8A8A8F] text-sm leading-relaxed">Precision cutting and hand-finishing services at our state-of-the-art facility.</p>
-            </div>
-          </div>
-          <div>
-            <h6 className="text-[#F5B938] font-bold tracking-[0.3em] text-xs mb-8">THE CRAFT</h6>
-            <h2 className="text-5xl md:text-6xl font-noto-serif font-bold text-[#F7F7F5] leading-tight mb-10">Beyond the Surface.</h2>
-            <div className="space-y-12">
-              {[
-                { num: '01.', title: 'Catalogue Selection', desc: 'Choose from Raj Lakshmi whites, beiges, greys, black stones, brown tones, and imported feature marbles.' },
-                { num: '02.', title: 'Material Matching', desc: 'Every slab is reviewed for color consistency, vein movement, finish suitability, and the space it will serve.' },
-                { num: '03.', title: 'Installed Excellence', desc: 'From selection to fitting, the same team carries accountability through to the finished surface.' },
-              ].map(({ num, title, desc }) => (
-                <div key={num} className="flex space-x-6">
-                  <span className="text-[#bb0016] text-2xl font-noto-serif italic pt-1">{num}</span>
-                  <div>
-                    <h4 className="text-[#F7F7F5] font-bold text-xl mb-3">{title}</h4>
-                    <p className="text-[#8A8A8F] leading-relaxed">{desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Inquiry Section */}
-      <section className="py-32 bg-surface-container-low">
+      <section className="pt-32 pb-12 bg-[#F7F7F5]">
         <div className="max-w-screen-2xl mx-auto px-12">
           <div className="bg-[#F7F7F5] p-16 md:p-24 rounded-2xl flex flex-col md:flex-row gap-20 items-center justify-between">
             <div className="max-w-xl">

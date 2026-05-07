@@ -14,7 +14,7 @@ export default function Footer() {
               aria-label="Raj Lakshmi Marbles home"
             >
               <img
-                src="/logo-black-red.png"
+                src="/logo-cropped.png"
                 alt="Raj Lakshmi Marbles"
                 className="h-14 md:h-16 w-auto"
               />
