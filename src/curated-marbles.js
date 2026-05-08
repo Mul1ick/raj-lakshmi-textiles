@@ -113,6 +113,11 @@ const curatedMarbles = [
 
   { name: "Armani Bronze", category: "Brown", src: asset("armani-bronze.jpg") },
   { name: "Black Rose", category: "Black", src: asset("black-rose.jpg") },
+  {
+    name: "Nero Saint Lauren",
+    category: "Black",
+    src: asset("nero-saint-lauren.png"),
+  },
   { name: "De Martino", category: "Imported", src: asset("de-martino.jpg") },
   {
     name: "Blue Loracia",
@@ -169,6 +174,61 @@ const curatedMarbles = [
     name: "Dark Emprador",
     category: "Imported",
     src: asset("dark-emprador.png"),
+  },
+  {
+    name: "White Travertine",
+    category: "Travertine",
+    src: asset("white-travertine.png"),
+  },
+  {
+    name: "Titanium Travertine",
+    category: "Travertine",
+    src: asset("titanium-travertine.png"),
+  },
+  {
+    name: "Red Travertine",
+    category: "Travertine",
+    src: asset("red-travertine.png"),
+  },
+  {
+    name: "Beige Travertine",
+    category: "Travertine",
+    src: asset("beige-travertine.png"),
+  },
+  {
+    name: "Silver Travertine",
+    category: "Travertine",
+    src: asset("silver-travertine.png"),
+  },
+  {
+    name: "Mocca Cream",
+    category: "Travertine",
+    src: asset("mocca-cream.png"),
+  },
+  {
+    name: "Green Onyx",
+    category: "Onyx",
+    src: asset("green-onyx.png"),
+  },
+  {
+    name: "Honey Onyx",
+    category: "Onyx",
+    src: asset("honey-onyx.png"),
+  },
+  {
+    name: "Mango Onyx",
+    category: "Onyx",
+    src: asset("mango-onyx.png"),
+  },
+  {
+    name: "Pink Onyx",
+    category: "Onyx",
+    src: asset("pink-onyx.png"),
+  },
+  {
+    name: "White Onyx",
+    category: "Onyx",
+    src: asset("white-onyx.png"),
   },
 ];
 
