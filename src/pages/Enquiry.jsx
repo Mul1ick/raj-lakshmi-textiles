@@ -1,4 +1,4 @@
-// https://script.google.com/macros/s/AKfycbwN83gPWHil5mAI8uXMUZpy3l0JfaqZKvLBoKPbMX1HGkFty0FnVq943WPxOflW99K3/exec
+// https://script.google.com/macros/s/AKfycbwN83gPWHil5mAI8uXMUZpy3l0JfaqZKvLBoKPbMX1HGkFty0FnVq943WPxOflW99K3/exec testing sheet
 import { useState } from 'react'
 import curatedMarbles from '../curated-marbles'
 
@@ -41,7 +41,7 @@ export default function Enquiry() {
     setSubmitStatus('submitting')
 
     // Replace this with your actual Google Apps Script Web App URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN83gPWHil5mAI8uXMUZpy3l0JfaqZKvLBoKPbMX1HGkFty0FnVq943WPxOflW99K3/exec'
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTnbkowk2HHH2C4VEZDbGk-xnkPdar32cxO7ypCTJkmLpwr0WKXvBaAnmXiq6yb-jrjA/exec'
 
     const payload = {
       ...formData,
