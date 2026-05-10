@@ -1,77 +1,78 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import StoneCard from '../components/StoneCard'
-import curatedMarbles from '../curated-marbles'
-import { downloadCataloguePdf } from '../utils/catalogPdf'
+import { useState, useMemo, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import StoneCard from "../components/StoneCard";
+import curatedMarbles from "../curated-marbles";
+import { downloadCataloguePdf } from "../utils/catalogPdf";
 
-const PAGE_SIZE = 12
+const PAGE_SIZE = 12;
 
 export default function Catalog() {
-  const [page, setPage] = useState(1)
-  const [filter, setFilter] = useState('All')
-  const [active, setActive] = useState(null)
-  const [transitioning, setTransitioning] = useState(false)
-  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
-  const sectionRef = useRef(null)
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState("All");
+  const [active, setActive] = useState(null);
+  const [transitioning, setTransitioning] = useState(false);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const sectionRef = useRef(null);
 
   const handleDownloadCatalogue = async () => {
-    setIsGeneratingPdf(true)
+    setIsGeneratingPdf(true);
     try {
-      await downloadCataloguePdf()
+      await downloadCataloguePdf();
     } finally {
-      setIsGeneratingPdf(false)
+      setIsGeneratingPdf(false);
     }
-  }
+  };
 
   const goToPage = (p) => {
-    if (p === page) return
-    setTransitioning(true)
+    if (p === page) return;
+    setTransitioning(true);
     if (sectionRef.current) {
-      const top = sectionRef.current.getBoundingClientRect().top + window.scrollY - 200
-      const distance = Math.abs(window.scrollY - top)
-      window.scrollTo({ top, behavior: 'smooth' })
-      const delay = Math.min(600, Math.max(200, distance * 0.4))
+      const top =
+        sectionRef.current.getBoundingClientRect().top + window.scrollY - 200;
+      const distance = Math.abs(window.scrollY - top);
+      window.scrollTo({ top, behavior: "smooth" });
+      const delay = Math.min(600, Math.max(200, distance * 0.4));
       setTimeout(() => {
-        setPage(p)
-        requestAnimationFrame(() => setTransitioning(false))
-      }, delay)
+        setPage(p);
+        requestAnimationFrame(() => setTransitioning(false));
+      }, delay);
     } else {
-      setPage(p)
-      requestAnimationFrame(() => setTransitioning(false))
+      setPage(p);
+      requestAnimationFrame(() => setTransitioning(false));
     }
-  }
+  };
 
   const categories = useMemo(() => {
-    const cats = Array.from(new Set(curatedMarbles.map((m) => m.category)))
-    return ['All', ...cats]
-  }, [])
+    const cats = Array.from(new Set(curatedMarbles.map((m) => m.category)));
+    return ["All", ...cats];
+  }, []);
 
   const filtered = useMemo(() => {
-    return filter === 'All'
+    return filter === "All"
       ? curatedMarbles
-      : curatedMarbles.filter((m) => m.category === filter)
-  }, [filter])
+      : curatedMarbles.filter((m) => m.category === filter);
+  }, [filter]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
-  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
-
-  useEffect(() => {
-    setPage(1)
-  }, [filter])
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && setActive(null)
+    setPage(1);
+  }, [filter]);
+
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && setActive(null);
     if (active) {
-      document.body.style.overflow = 'hidden'
-      window.addEventListener('keydown', onKey)
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", onKey);
     }
     return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('keydown', onKey)
-    }
-  }, [active])
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [active]);
 
-  const featured = curatedMarbles.slice(0, 5)
+  const featured = curatedMarbles.slice(3, 8);
 
   return (
     <div className="bg-surface text-on-surface">
@@ -79,18 +80,26 @@ export default function Catalog() {
         {/* Hero */}
         <header className="px-12 max-w-screen-2xl mx-auto mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
           <div className="max-w-2xl">
-            <span className="text-tertiary font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Curated Selection</span>
+            <span className="text-tertiary font-bold tracking-[0.2em] text-xs uppercase mb-4 block">
+              Curated Selection
+            </span>
             <h1 className="text-6xl md:text-8xl font-bold text-[#1C1C1E] leading-[0.9] tracking-tighter font-noto-serif">
-              Earth's <br /><span className="text-[#EF2029]">Masterpieces</span>
+              Earth's <br />
+              <span className="text-[#EF2029]">Masterpieces</span>
             </h1>
           </div>
           <div className="max-w-sm">
             <p className="text-[#8A8A8F] leading-relaxed">
-              Our catalogue brings together the Raj Lakshmi collection across white, beige, grey, black, brown, and imported marbles. Each stone is selected for practical use, visual character, and long-term finish quality.
+              Our catalogue brings together the Raj Lakshmi collection across
+              white, beige, grey, black, brown, and imported marbles. Each stone
+              is selected for practical use, visual character, and long-term
+              finish quality.
             </p>
             <div className="mt-6 flex items-center gap-4">
               <span className="h-[1px] w-12 bg-outline-variant"></span>
-              <span className="text-xs font-bold text-[#1C1C1E] tracking-widest">EST. 1988</span>
+              <span className="text-xs font-bold text-[#1C1C1E] tracking-widest">
+                EST. 1988
+              </span>
             </div>
           </div>
         </header>
@@ -132,11 +141,18 @@ export default function Catalog() {
         </section>
 
         {/* Full Catalogue */}
-        <section ref={sectionRef} className="px-12 max-w-screen-2xl mx-auto mt-32 scroll-mt-24">
+        <section
+          ref={sectionRef}
+          className="px-12 max-w-screen-2xl mx-auto mt-32 scroll-mt-24"
+        >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
             <div>
-              <span className="text-tertiary font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Full Collection</span>
-              <h2 className="text-4xl md:text-5xl font-bold font-noto-serif text-[#1C1C1E] leading-tight">The Complete Catalogue</h2>
+              <span className="text-tertiary font-bold tracking-[0.2em] text-xs uppercase mb-3 block">
+                Full Collection
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold font-noto-serif text-[#1C1C1E] leading-tight">
+                The Complete Catalogue
+              </h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {categories.map((c) => (
@@ -145,8 +161,8 @@ export default function Catalog() {
                   onClick={() => setFilter(c)}
                   className={`px-4 py-2 text-xs font-bold tracking-widest uppercase border transition-colors ${
                     filter === c
-                      ? 'bg-[#1C1C1E] text-white border-[#1C1C1E]'
-                      : 'bg-transparent text-[#1C1C1E] border-[#1C1C1E]/20 hover:border-[#1C1C1E]'
+                      ? "bg-[#1C1C1E] text-white border-[#1C1C1E]"
+                      : "bg-transparent text-[#1C1C1E] border-[#1C1C1E]/20 hover:border-[#1C1C1E]"
                   }`}
                 >
                   {c}
@@ -155,7 +171,9 @@ export default function Catalog() {
             </div>
           </div>
 
-          <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-opacity duration-300 ease-out ${transitioning ? 'opacity-0' : 'opacity-100'}`}>
+          <div
+            className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-opacity duration-300 ease-out ${transitioning ? "opacity-0" : "opacity-100"}`}
+          >
             {pageItems.map((stone, idx) => (
               <button
                 key={`${stone.name}-${stone.src}`}
@@ -170,16 +188,20 @@ export default function Catalog() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-[#1C1C1E]/0 group-hover:bg-[#1C1C1E]/20 transition-colors flex items-center justify-center">
-                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold tracking-widest uppercase">View</span>
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold tracking-widest uppercase">
+                      View
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-base font-bold text-[#1C1C1E]">{stone.name}</h3>
+                    <h3 className="text-base font-bold text-[#1C1C1E]">
+                      {stone.name}
+                    </h3>
                     <p className="text-[#8A8A8F] text-xs">{stone.category}</p>
                   </div>
                   <span className="text-[#EF2029] text-xs font-bold">
-                    {String((page - 1) * PAGE_SIZE + idx + 1).padStart(3, '0')}
+                    {String((page - 1) * PAGE_SIZE + idx + 1).padStart(3, "0")}
                   </span>
                 </div>
               </button>
@@ -196,19 +218,21 @@ export default function Catalog() {
                 Previous
               </button>
               <div className="flex gap-2">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <button
-                    key={p}
-                    onClick={() => goToPage(p)}
-                    className={`w-10 h-10 text-sm font-bold transition-colors ${
-                      p === page
-                        ? 'bg-[#1C1C1E] text-white'
-                        : 'text-[#1C1C1E] hover:bg-[#1C1C1E]/5'
-                    }`}
-                  >
-                    {p}
-                  </button>
-                ))}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (p) => (
+                    <button
+                      key={p}
+                      onClick={() => goToPage(p)}
+                      className={`w-10 h-10 text-sm font-bold transition-colors ${
+                        p === page
+                          ? "bg-[#1C1C1E] text-white"
+                          : "text-[#1C1C1E] hover:bg-[#1C1C1E]/5"
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ),
+                )}
               </div>
               <button
                 onClick={() => goToPage(Math.min(totalPages, page + 1))}
@@ -224,8 +248,14 @@ export default function Catalog() {
         {/* CTA */}
         <section className="mt-32 px-12 max-w-screen-2xl mx-auto">
           <div className="bg-white p-16 md:p-24 flex flex-col items-center text-center border border-[#e8bcb8]/10">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-8 max-w-2xl font-noto-serif">Require a bespoke consultation for your project?</h2>
-            <p className="text-[#8A8A8F] max-w-lg mb-12">Our specialists help homeowners, architects, and developers select the right marble for the project, fabrication requirements, and installation conditions.</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-8 max-w-2xl font-noto-serif">
+              Require a bespoke consultation for your project?
+            </h2>
+            <p className="text-[#8A8A8F] max-w-lg mb-12">
+              Our specialists help homeowners, architects, and developers select
+              the right marble for the project, fabrication requirements, and
+              installation conditions.
+            </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <button
                 type="button"
@@ -233,9 +263,14 @@ export default function Catalog() {
                 disabled={isGeneratingPdf}
                 className="bg-primary text-on-primary px-10 py-4 text-sm font-bold tracking-widest uppercase hover:scale-105 transition-transform disabled:cursor-wait disabled:opacity-70 disabled:hover:scale-100"
               >
-                {isGeneratingPdf ? 'Preparing PDF...' : 'Request Catalogue PDF'}
+                {isGeneratingPdf ? "Preparing PDF..." : "Request Catalogue PDF"}
               </button>
-              <Link to="/enquiry" className="border-b-2 border-tertiary text-[#1C1C1E] px-4 py-4 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Visit Raj Lakshmi</Link>
+              <Link
+                to="/enquiry"
+                className="border-b-2 border-tertiary text-[#1C1C1E] px-4 py-4 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors"
+              >
+                Visit Raj Lakshmi
+              </Link>
             </div>
           </div>
         </section>
@@ -264,12 +299,16 @@ export default function Catalog() {
               className="max-h-[75vh] w-auto object-contain"
             />
             <div className="text-center mt-8">
-              <span className="text-[#F5B938] font-bold tracking-[0.3em] text-xs uppercase mb-3 block">{active.category}</span>
-              <h3 className="text-3xl md:text-4xl font-bold font-noto-serif text-white">{active.name}</h3>
+              <span className="text-[#F5B938] font-bold tracking-[0.3em] text-xs uppercase mb-3 block">
+                {active.category}
+              </span>
+              <h3 className="text-3xl md:text-4xl font-bold font-noto-serif text-white">
+                {active.name}
+              </h3>
             </div>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }

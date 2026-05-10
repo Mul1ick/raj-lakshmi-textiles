@@ -113,11 +113,15 @@ const curatedMarbles = [
   { name: "Symphony Grey", category: "Grey", src: asset("symphony-grey.jpg") },
   { name: "Ottoman Cream", category: "Grey", src: asset("ottoman-cream.jpg") },
 
-  { name: "Armani Bronze", category: "Brown", src: asset("armani-bronze.jpg") },
-  { name: "Black Rose", category: "Black", src: asset("black-rose.jpg") },
+  {
+    name: "Armani Bronze",
+    category: "Exotic",
+    src: asset("armani-bronze.jpg"),
+  },
+  { name: "Black Rose", category: "Exotic", src: asset("black-rose.jpg") },
   {
     name: "Nero Saint Laurent",
-    category: "Black",
+    category: "Exotic",
     src: asset("nero-saint-laurent.png"),
   },
   { name: "De Martino", category: "Exotic", src: asset("de-martino.jpg") },
