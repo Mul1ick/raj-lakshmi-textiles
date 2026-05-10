@@ -26,9 +26,9 @@ const curatedMarbles = [
   { name: "Dover White", category: "White", src: asset("dover-white.jpg") },
 
   {
-    name: "Botticino Classico",
+    name: "Botticino",
     category: "Beige",
-    src: asset("botticino-classico.png"),
+    src: asset("botticino.png"),
   },
   {
     name: "Botticino Extra",
@@ -63,14 +63,14 @@ const curatedMarbles = [
   //   category: "Beige",
   //   src: asset("perlato-istanbul.jpg"),
   // },
-  // { name: "Mellisa Beige", category: "Beige", src: asset("mellisa-beige.jpg") }, 
+  // { name: "Mellisa Beige", category: "Beige", src: asset("mellisa-beige.jpg") },
   {
     name: "French Vanilla",
     category: "Beige",
     src: asset("french-vanilla.jpg"),
   },
 
-  { name: "Grey Milano", category: "Grey", src: asset("grey-milano.png") },
+  { name: "Grey Milano", category: "Grey", src: asset("grey-milano.jpg") },
   { name: "Silver River", category: "Grey", src: asset("silver-river.png") },
   {
     name: "Grey Esprado",
@@ -94,10 +94,11 @@ const curatedMarbles = [
   { name: "Erey Grey", category: "Grey", src: asset("erey-grey.jpg") },
   // { name: "Sardan Khadi", category: "Grey", src: asset("sardan-khadi.jpg") },
   { name: "Iceberg Grey", category: "Grey", src: asset("iceberg-grey.jpg") },
-  // { name: "Ritza Grey", category: "Grey", src: asset("ritza-grey.jpg") },
+  { name: "Grey William", category: "Grey", src: asset("ritza-grey.jpg") },
   { name: "Light Grey", category: "Grey", src: asset("light-grey.jpg") },
   { name: "Fantasy Grey", category: "Grey", src: asset("fantasy-grey.jpg") },
   { name: "Saran Koli", category: "Grey", src: asset("saran-koli.jpg") },
+  { name: "Pietra Grey", category: "Grey", src: asset("pietra-grey.png") },
   {
     name: "Silver Light Grey",
     category: "Grey",
@@ -110,6 +111,7 @@ const curatedMarbles = [
     src: asset("moca-cream-fine-grain.jpg"),
   },
   { name: "Symphony Grey", category: "Grey", src: asset("symphony-grey.jpg") },
+  { name: "Ottoman Cream", category: "Grey", src: asset("ottoman-cream.jpg") },
 
   { name: "Armani Bronze", category: "Brown", src: asset("armani-bronze.jpg") },
   { name: "Black Rose", category: "Black", src: asset("black-rose.jpg") },
@@ -118,61 +120,61 @@ const curatedMarbles = [
     category: "Black",
     src: asset("nero-saint-lauren.png"),
   },
-  { name: "De Martino", category: "Imported", src: asset("de-martino.jpg") },
+  { name: "De Martino", category: "Exotic", src: asset("de-martino.jpg") },
   // {
   //   name: "Blue Loracia",
-  //   category: "Imported",
+  //   category: "Exotic",
   //   src: asset("blue-loracia.jpg"),
   // },
   {
     name: "Vanilla Spider",
-    category: "Imported",
+    category: "Exotic",
     src: asset("vanilla-spider.jpg"),
   },
   {
     name: "Rosso Alicante",
-    category: "Imported",
+    category: "Exotic",
     src: asset("rosso-alicante.jpg"),
   },
   {
     name: "Golden Emperador",
-    category: "Imported",
+    category: "Exotic",
     src: asset("golden-emperador.jpg"),
   },
   {
     name: "Rosso Lavante",
-    category: "Imported",
+    category: "Exotic",
     src: asset("rosso-lavante.png"),
   },
   {
     name: "Silver Portoro",
-    category: "Imported",
+    category: "Exotic",
     src: asset("silver-portoro.png"),
   },
   {
     name: "Golden Portoro",
-    category: "Imported",
+    category: "Exotic",
     src: asset("golden-portoro.png"),
   },
   {
     name: "Metallic Rust",
-    category: "Imported",
+    category: "Exotic",
     src: asset("metallic-rust.png"),
   },
-  { name: "Irish Brown", category: "Imported", src: asset("irish-brown.png") },
+  { name: "Irish Brown", category: "Exotic", src: asset("irish-brown.png") },
   {
     name: "Black Markino",
-    category: "Imported",
+    category: "Exotic",
     src: asset("black-markino.png"),
   },
   {
     name: "Light Emprador",
-    category: "Imported",
+    category: "Exotic",
     src: asset("light-emprador.png"),
   },
   {
     name: "Dark Emprador",
-    category: "Imported",
+    category: "Exotic",
     src: asset("dark-emprador.png"),
   },
   {
