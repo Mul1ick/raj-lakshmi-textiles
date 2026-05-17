@@ -1,7 +1,4 @@
-const marbleAssetModules = import.meta.glob('../assets/marbles/*.{jpg,jpeg,png}', {
-  eager: true,
-  import: 'default',
-})
+import curatedMarbles from '../curated-marbles'
 
 const PAGE_WIDTH = 595.28
 const PAGE_HEIGHT = 841.89
@@ -10,12 +7,6 @@ const IMAGE_WIDTH = 230
 const IMAGE_HEIGHT = 172
 const IMAGE_EXPORT_WIDTH = 920
 const IMAGE_EXPORT_HEIGHT = 688
-
-const titleCase = (value) =>
-  value
-    .replace(/\.[^.]+$/, '')
-    .replace(/[-_]+/g, ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase())
 
 const escapePdfText = (value) =>
   String(value)
@@ -73,24 +64,6 @@ const imageToJpegBytes = async (src) => {
   return dataUrlToBytes(canvas.toDataURL('image/jpeg', 0.82))
 }
 
-const getMarbleImages = () => {
-  const byName = new Map()
-
-  Object.entries(marbleAssetModules).forEach(([path, src]) => {
-    const filename = path.split('/').pop()
-    const key = filename.replace(/\.[^.]+$/, '')
-    if (!byName.has(key)) {
-      byName.set(key, {
-        filename,
-        name: titleCase(filename),
-        src,
-      })
-    }
-  })
-
-  return Array.from(byName.values()).sort((a, b) => a.name.localeCompare(b.name))
-}
-
 const text = (value, x, y, size = 10, font = 'F1') =>
   `BT /${font} ${size} Tf ${x} ${y} Td (${escapePdfText(value)}) Tj ET\n`
 
@@ -103,18 +76,43 @@ const centeredText = (value, x, y, boxWidth, size = 10, font = 'F1') => {
 const makeImageDraw = (resourceName, x, y, width, height) =>
   `q ${width} 0 0 ${height} ${x} ${y} cm /${resourceName} Do Q\n`
 
-const makePageContent = (items, pageNumber, totalPages) => {
+const getCategoryPages = (items) => {
+  const groups = new Map()
+
+  items.forEach((item) => {
+    if (!groups.has(item.category)) {
+      groups.set(item.category, [])
+    }
+    groups.get(item.category).push(item)
+  })
+
+  return Array.from(groups.entries()).flatMap(([category, categoryItems]) => {
+    const categoryPages = []
+    for (let index = 0; index < categoryItems.length; index += 6) {
+      categoryPages.push({
+        category,
+        items: categoryItems.slice(index, index + 6),
+      })
+    }
+    return categoryPages
+  })
+}
+
+const makePageContent = ({ category, items }, pageNumber, totalPages) => {
   const content = []
-  content.push('q 0.92 0.92 0.9 rg BT /F2 72 Tf 50 394 Td (RAJ LAKSHMI) Tj ET Q\n')
-  content.push(text('Raj Lakshmi Marbles Catalogue', PAGE_MARGIN, 800, 16, 'F2'))
+  content.push('q 0.92 0.92 0.9 rg BT /F2 70 Tf 46 394 Td (RAJ LAKSHMI) Tj ET Q\n')
+  content.push(text('Raj Lakshmi Marbles Catalogue', PAGE_MARGIN, 806, 14, 'F2'))
   content.push(text(`Page ${pageNumber} of ${totalPages}`, 494, 802, 8))
-  content.push('0.75 0.05 0.08 RG 42 786 m 553 786 l S\n')
+  content.push('0.75 0.05 0.08 RG 42 790 m 553 790 l S\n')
+  content.push('0.75 0.05 0.08 rg\n')
+  content.push(text(`${category} Collection`, PAGE_MARGIN, 758, 24, 'F2'))
+  content.push('0.10 0.10 0.11 rg\n')
 
   const positions = [
-    [PAGE_MARGIN, 554],
-    [323, 554],
-    [PAGE_MARGIN, 300],
-    [323, 300],
+    [PAGE_MARGIN, 526],
+    [323, 526],
+    [PAGE_MARGIN, 286],
+    [323, 286],
     [PAGE_MARGIN, 46],
     [323, 46],
   ]
@@ -156,15 +154,12 @@ const buildPdf = (images) => {
   }))
 
   const pages = []
-  const chunks = []
-  for (let index = 0; index < imageObjects.length; index += 6) {
-    chunks.push(imageObjects.slice(index, index + 6))
-  }
+  const categoryPages = getCategoryPages(imageObjects)
 
-  chunks.forEach((chunk, index) => {
-    const content = makePageContent(chunk, index + 1, chunks.length)
+  categoryPages.forEach((categoryPage, index) => {
+    const content = makePageContent(categoryPage, index + 1, categoryPages.length)
     const contentId = addObject(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`)
-    const xObjects = chunk.map((item) => `/${item.resourceName} ${item.objectId} 0 R`).join(' ')
+    const xObjects = categoryPage.items.map((item) => `/${item.resourceName} ${item.objectId} 0 R`).join(' ')
     const pageId = addObject(
       `<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] /Resources << /Font << /F1 ${fontId} 0 R /F2 ${boldFontId} 0 R >> /XObject << ${xObjects} >> >> /Contents ${contentId} 0 R >>`,
     )
@@ -213,10 +208,9 @@ const buildPdf = (images) => {
 }
 
 export const downloadCataloguePdf = async () => {
-  const marbleImages = getMarbleImages()
   const images = []
 
-  for (const marble of marbleImages) {
+  for (const marble of curatedMarbles) {
     images.push({
       ...marble,
       bytes: await imageToJpegBytes(marble.src),
