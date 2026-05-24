@@ -14,11 +14,12 @@ const curatedMarbles = [
   { name: "Michelangelo", category: "White", src: asset("michelangelo.png") },
 
   { name: "Volakas White", category: "White", src: asset("volakas-white.png") },
-  { name: "Vietnam White", category: "White", src: asset("vietnam-white.png") },
+  { name: "Lasa White", category: "White", src: asset("lasa-white.png") },
+  { name: "Statuario", category: "White", src: asset("staturio.png") },
   {
     name: "Statuario Venatino",
     category: "White",
-    src: asset("statuario-venatino.png"),
+    src: asset("staturio-venitino.png"),
   },
   { name: "Lilac White", category: "White", src: asset("lilac-white.png") },
   { name: "Golden Spider", category: "White", src: asset("golden-spider.png") },
@@ -41,13 +42,14 @@ const curatedMarbles = [
   { name: "Crema Marfil", category: "Beige", src: asset("crema-marfil.png") },
   { name: "Moon Cream", category: "Beige", src: asset("moon-cream.png") },
   { name: "Ottoman Beige", category: "Beige", src: asset("ottoman-beige.png") },
-  { name: "Crema Bella", category: "Beige", src: asset("crema-bella.jpg") },
-  { name: "Regal Beige", category: "Beige", src: asset("regal-beige.jpg") },
-  { name: "Light Regal", category: "Beige", src: asset("light-regal.jpg") },
+  { name: "Crema Bella", category: "Beige", src: asset("crema-bella.png") },
+  { name: "Regal Beige", category: "Beige", src: asset("regal-beige.png") },
+  // { name: "Light Regal", category: "Beige", src: asset("light-regal.jpg") },
   { name: "Italy Dyna", category: "Beige", src: asset("italy-dyna.jpg") },
   { name: "Turkish Dyna", category: "Beige", src: asset("turkish-dyna.jpg") },
-  { name: "De Martino", category: "Beige", src: asset("de-martino.jpg") },
-  { name: "Ottoman Cream", category: "Beige", src: asset("ottoman-cream.jpg") },
+  { name: "De Martino", category: "Beige", src: asset("de-martino.png") },
+  { name: "perlato-sicilia", category: "Beige", src: asset("perlato-sicilia.jpg") },  
+  // { name: "Ottoman Cream", category: "Beige", src: asset("ottoman-cream.jpg") },
   {
     name: "Burberry Beige",
     category: "Beige",
@@ -62,6 +64,7 @@ const curatedMarbles = [
   { name: "Royal Beige", category: "Beige", src: asset("royal-beige.jpg") },
   { name: "Sofital Beige", category: "Beige", src: asset("sofital-beige.jpg") },
   { name: "Sugar Beige", category: "Beige", src: asset("sugar-beige.jpg") },
+  { name: "Mellisa Beige", category: "Beige", src: asset("mellisa-beige.jpg") },
 
   {
     name: "French Vanilla",
@@ -82,6 +85,7 @@ const curatedMarbles = [
   // ----------- GREY -------------
   { name: "Grey Milano", category: "Grey", src: asset("grey-milano.jpg") },
   { name: "Silver River", category: "Grey", src: asset("silver-river.png") },
+  { name: "Grey William", category: "Grey", src: asset("grey-william.png") },
   {
     name: "Grey Esprado",
     category: "Grey",
@@ -173,6 +177,11 @@ const curatedMarbles = [
     name: "Dark Emprador",
     category: "Exotic",
     src: asset("dark-emprador.png"),
+  },
+  {
+    name: "Blue Brescia",
+    category: "Exotic",
+    src: asset("blue-brescia.png"),
   },
 
   // --------- TRAVERTINE ------------
