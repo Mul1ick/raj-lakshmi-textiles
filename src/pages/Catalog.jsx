@@ -217,7 +217,7 @@ export default function Catalog() {
               >
                 Previous
               </button>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap justify-center gap-2 max-w-[200px] md:max-w-full">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                   (p) => (
                     <button

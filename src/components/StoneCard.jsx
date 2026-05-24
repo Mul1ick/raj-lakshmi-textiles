@@ -6,7 +6,7 @@ export default function StoneCard({
   number, 
   aspectRatio = "aspect-square", 
   className = "",
-  lazyLoad = true // Default to true for performance
+  lazyLoad = true
 }) {
   return (
     <div className={`group cursor-pointer ${className}`}>
@@ -16,6 +16,7 @@ export default function StoneCard({
           alt={alt}
           src={src}
           loading={lazyLoad ? "lazy" : "eager"}
+          decoding="async"
         />
       </div>
       <div className="flex justify-between items-start">

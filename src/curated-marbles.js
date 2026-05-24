@@ -76,11 +76,7 @@ const curatedMarbles = [
     category: "Beige",
     src: asset("vanilla-spider.jpg"),
   },
-  {
-    name: "Moca Cream Fine Grain",
-    category: "Beige",
-    src: asset("moca-cream-fine-grain.jpg"),
-  },
+  
   {
     name: "Blue Brescia",
     category: "Beige",
@@ -216,6 +212,11 @@ const curatedMarbles = [
     category: "Travertine",
     src: asset("mocca-cream.png"),
   },
+  {
+    name: "Moca Cream Fine Grain",
+    category: "Travertine",
+    src: asset("moca-cream-fine-grain.jpg"),
+  },
 
   // -------- ONYX ---------
   {
@@ -256,7 +257,7 @@ export default curatedMarbles;
       name: "Blue Loracia",
       category: "Exotic",
       src: asset("blue-loracia.jpg"),
-    },
+      },
 */
 /* 
   {
