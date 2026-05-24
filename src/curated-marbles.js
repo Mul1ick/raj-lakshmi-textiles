@@ -38,7 +38,7 @@ const curatedMarbles = [
     src: asset("botticino-extra.png"),
   },
   { name: "Bianco Marfil", category: "Beige", src: asset("bianco-marfil.png") },
-  { name: "Crema Diva", category: "Beige", src: asset("crema-diva.jpg") },
+  { name: "Crema Diva", category: "Beige", src: asset("crema-diva.png") },
   { name: "Crema Marfil", category: "Beige", src: asset("crema-marfil.png") },
   { name: "Moon Cream", category: "Beige", src: asset("moon-cream.png") },
   { name: "Ottoman Beige", category: "Beige", src: asset("ottoman-beige.png") },
@@ -81,6 +81,11 @@ const curatedMarbles = [
     category: "Beige",
     src: asset("moca-cream-fine-grain.jpg"),
   },
+  {
+    name: "Blue Brescia",
+    category: "Beige",
+    src: asset("blue-brescia.png"),
+  },
 
   // ----------- GREY -------------
   { name: "Grey Milano", category: "Grey", src: asset("grey-milano.jpg") },
@@ -102,7 +107,7 @@ const curatedMarbles = [
   { name: "Premium Grey", category: "Grey", src: asset("premium-grey.jpg") },
   { name: "Erey Grey", category: "Grey", src: asset("erey-grey.jpg") },
   { name: "Iceberg Grey", category: "Grey", src: asset("iceberg-grey.jpg") },
-  { name: "Grey William", category: "Grey", src: asset("ritza-grey.jpg") },
+  // { name: "Grey William", category: "Grey", src: asset("ritza-grey.jpg") },
   { name: "Light Grey", category: "Grey", src: asset("light-grey.jpg") },
   { name: "Fantasy Grey", category: "Grey", src: asset("fantasy-grey.jpg") },
   { name: "Saran Koli", category: "Grey", src: asset("saran-koli.jpg") },
@@ -178,11 +183,7 @@ const curatedMarbles = [
     category: "Exotic",
     src: asset("dark-emprador.png"),
   },
-  {
-    name: "Blue Brescia",
-    category: "Exotic",
-    src: asset("blue-brescia.png"),
-  },
+  
 
   // --------- TRAVERTINE ------------
   {
