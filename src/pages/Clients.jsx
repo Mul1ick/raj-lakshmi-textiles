@@ -7,6 +7,7 @@ import dlfLogo from '../assets/clients/dlf.svg'
 import maxLogo from '../assets/clients/max.svg'
 import leMeridienLogo from '../assets/clients/le-meridien.svg'
 import marriottLogo from '../assets/clients/marriott.svg'
+import perniasPopUpLogo from '../assets/clients/pernias-pop-up.svg'
 
 const clientLogos = [
   { name: 'Ahluwalia Contracts', logo: ahluwaliaContractsLogo },
@@ -15,6 +16,7 @@ const clientLogos = [
   { name: 'MAX', logo: maxLogo },
   { name: 'Le Meridien', logo: leMeridienLogo },
   { name: 'Marriott', logo: marriottLogo },
+  { name: "Pernia's Pop-Up", logo: perniasPopUpLogo },
 ]
 
 const carouselLogos = [...clientLogos, ...clientLogos]

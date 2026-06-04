@@ -98,7 +98,7 @@ export default function Catalog() {
             <div className="mt-6 flex items-center gap-4">
               <span className="h-[1px] w-12 bg-outline-variant"></span>
               <span className="text-xs font-bold text-[#1C1C1E] tracking-widest">
-                EST. 1988
+                EST. 1986
               </span>
             </div>
           </div>

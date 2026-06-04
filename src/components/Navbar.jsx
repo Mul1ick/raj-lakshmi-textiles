@@ -44,7 +44,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link className="flex items-center z-50" to="/">
           <img
-            src="/logo-cropped.png"
+            src="/logo-cropped-new.png"
             alt="Raj Lakshmi Marbles"
             className="h-12 md:h-14 w-auto hover:opacity-80 transition-opacity duration-300"
           />

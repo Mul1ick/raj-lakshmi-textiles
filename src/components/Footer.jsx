@@ -14,7 +14,7 @@ export default function Footer() {
               aria-label="Raj Lakshmi Marbles home"
             >
               <img
-                src="/logo-footer-white.png"
+                src="/logo-footer-white-new.png"
                 alt="Raj Lakshmi Marbles"
                 className="h-16 md:h-20 w-auto opacity-95"
               />
@@ -24,7 +24,7 @@ export default function Footer() {
               sourcing, fabrication, and installation experience.
             </p>
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#A7A29A]">
-              Est. 1984 · Crafted for Prestige
+              Est. 1986 · Crafted for Prestige
             </p>
           </div>
 

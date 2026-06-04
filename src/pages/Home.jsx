@@ -53,7 +53,7 @@ export default function Home() {
         <div className="relative z-10 w-full max-w-screen-2xl mx-auto px-12 lg:px-24">
           <div className="max-w-3xl">
             <span className="inline-block text-[#F5B938] font-bold tracking-[0.2em] text-xs mb-6 font-body">
-              ESTABLISHED 1988 — RAJ LAKSHMI MARBLES
+              ESTABLISHED 1986 — RAJ LAKSHMI MARBLES
             </span>
             <h1 className="text-7xl md:text-8xl font-noto-serif font-black text-[#1C1C1E] leading-[0.95] tracking-tight mb-8">
               The Art of <br />
